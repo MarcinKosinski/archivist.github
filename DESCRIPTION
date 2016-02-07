@@ -20,7 +20,8 @@ Imports:
     httr,
     git2r,
     jsonlite,
-    RCurl
+    RCurl,
+    httr
 Suggests:
     testthat,
     knitr

@@ -7,4 +7,5 @@ r_packages:
   - knitr
   - jsonlite
   - RCurl
+  - httr
 sudo: required
