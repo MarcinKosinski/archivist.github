@@ -7,7 +7,10 @@
 #' 
 #' \code{createGitHubRepo} is a GitHub version of \link{createEmptyLocalRepo} and creates a new GitHub repository 
 #' with an empty \pkg{archivist}-like \link{Repository}. It also creates a Local \code{Repository} which is git-synchronized with
-#' new GitHub repository. To learn more about \code{Archivist Integration With GitHub API} visit \link{agithub}.
+#' new GitHub repository. 
+#' 
+#' @details
+#' To learn more about  \code{Archivist Integration With GitHub} visit \link{agithub}.
 #' 
 #' 
 #' @details

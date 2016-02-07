@@ -7,8 +7,10 @@
 #' \code{archive} stores artifacts in the local \link{Repository} and automatically pushes archived
 #' artifacts to the Github \code{Repository} with which the local \code{Repository} is synchronized
 #' (via \link{createEmptyGithubRepo} or \link{cloneGithubRepo}). Function stores artifacts on the same
-#' way as \link{saveToRepo} function. More archivist functionalities that integrate archivist and GitHub API
-#'  can be found here \link{archivist-github-integration} (\link{agithub}).
+#' way as \link{saveToRepo} function. 
+#' 
+#' @details
+#' To learn more about  \code{Archivist Integration With GitHub} visit \link{agithub}.
 #'  
 #' @param artifact An artifact to be archived on Local and Github \link{Repository}.
 #' @param commitMessage A character denoting a message added to the commit while archiving \code{artifact} on GitHub Repository.

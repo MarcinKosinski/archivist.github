@@ -7,7 +7,8 @@
 #' \code{cloneGitHubRepo} is a wrapper around \code{git clone} and clones GitHub Repository
 #' into the \code{repoDir} directory.
 #' 
-#' More archivist functionalities that integrate archivist and GitHub API can be found here \link{archivist-github-integration} (\link{agithub}).
+#' @details
+#' To learn more about  \code{Archivist Integration With GitHub} visit \link{agithub}.
 #' @param repoURL The remote repository to clone.
 #' @param repoDir Local directory to clone to. If \code{NULL}, by default, creates a local directory,
 #' which corresponds to the name after last \code{/} in \code{repoURL}.

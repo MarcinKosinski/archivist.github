@@ -1,0 +1,10 @@
+language: r
+r_packages:
+	- archivist
+  - git2r
+  - httr
+  - RSQLite
+  - testthat
+  - knitr
+sudo: required
+
