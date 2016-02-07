@@ -92,10 +92,10 @@ cloneGitHubRepo <- function(repoURL, repoDir = NULL, default = FALSE, ...){
 	
 	
 	if (default) {
-		setLocalRepo(repoDir)
-		setGithubRepo(user = tail(strsplit(repoURL,
-																			 "/")[[1]],2)[1],
-									repo = tail(strsplit(repoURL,
+		archivist::aoptions('repoDir', repoDir)
+		archivist::aoptions('user', tail(strsplit(repoURL,
+																			 "/")[[1]],2)[1])
+		archivist::aoptions('repo',tail(strsplit(repoURL,
 																			 "/")[[1]],1))
 	}
 	return(repo2return)

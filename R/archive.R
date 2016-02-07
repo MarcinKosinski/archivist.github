@@ -17,31 +17,10 @@
 #' By default, an artifact's \link{md5hash} is added to the commit message when it is specified to \code{NULL}.
 #' @param repo A character denoting GitHub repository name and synchronized local existing directory in which an artifact will be saved.
 #' @param user A character denoting GitHub user name. Can be set globally with \code{aoptions("user", user)}.
-#'  See \link{archivist-github-integration}.
+#'  See \link{agithub}.
 #' @param password A character denoting GitHub user password. Can be set globally with \code{aoptions("password", password)}.
-#' See \link{archivist-github-integration}.
-#' @param archiveData A logical value denoting whether to archive the data from the \code{artifact}.
-#' 
-#' @param archiveTags A logical value denoting whether to archive Tags from the \code{artifact}.
-#' 
-#' @param archiveMiniature A logical value denoting whether to archive a miniature of the \code{artifact}.
-#' 
-#' @param archiveSessionInfo A logical value denoting whether to archive the session info that describes the context in this given artifact was created.
-#' 
-#' @param userTags A character vector with Tags. These Tags will be added to the repository along with the artifact.
-#' 
-#' @param force A logical value denoting whether to archive \code{artifact} if it is already archived in
-#' a Repository.
-#' 
-#' @param rememberName A logical value. Should not be changed by a user. It is a technical parameter.
-#' 
-#' @param silent If TRUE produces no warnings.
-#' 
-#' @param ascii A logical value. An \code{ascii} argument is passed to \link{save} function.
-#' 
-#' @param ... Further arguments passed to \link{alink} function, when \code{alink} set to \code{TRUE} OR 
-#' graphical parameters denoting width and height of a miniature. See details. 
-#' Further arguments passed to \link{head}. See Details section in \link{saveToRepo} about \code{firtsRows} parameter
+#' See \link{agithub}.
+#' @param ... Further arguments passed to \link{alink} and \link{saveToRepo} functions.
 #' 
 #' @param alink Logical. Whether the result should be put into \link{alink} function. Pass further arguments with \code{...}
 #' parameter.
@@ -102,151 +81,21 @@
 #' @family archivist.github
 #' @rdname archive
 #' @export
-archive <- function(artifact, commitMessage = aoptions("commitMessage"),
+archive <- function(artifact, 
+										commitMessage = aoptions("commitMessage"),
 										repo = aoptions("repo"), 
 										user = aoptions("user"),
 										password = aoptions("password"),
-										archiveData = aoptions("archiveData"), 
-										archiveTags = aoptions("archiveTags"), 
-										archiveMiniature = aoptions("archiveMiniature"),
-										archiveSessionInfo = aoptions("archiveSessionInfo"),
-										force = aoptions("force"),
-										rememberName = aoptions("rememberName"), 
-										... ,
-										userTags = c(), 
-										silent=aoptions("silent"),
-										ascii = aoptions("ascii"), 
-										alink = aoptions("alink")){
-	stopifnot(is.character(repo) & length(repo) ==1)
-	stopifnot(is.character(user) & length(user)==1)
-	stopifnot(is.character(password) & length(password)==1)
-	#  stopifnot( is.character( userTags ))    - user can specify tags: userTags = 1:2, and they should
-	# be converted to characters as in the previous archivist versions. we even have testsfor that
+										alink = aoptions("alink"),
+										...){
+	stopifnot(is.character(c(repo, user, password, commitMessage)))
+	stopifnot(length(repo) == 1, 
+						length(user) == 1,
+						length(password) == 1,
+						length(commitMessage) == 1)
 	stopifnot(is.logical(alink) & length(alink) == 1)
-	#stopifnot(is.logical(response) & length(response) ==1)
-	
-	# artifact archiving
-	# the name of the GitHub repo should be the same
-	# as local clone repo (can be cloned with cloneGithubRepo)
-	# or initialized with createEmptyGithubRepo
-	#   saveToRepo(artifact = artifact, repoDir = repo,
-	#              userTags = paste0("name:", 
-	#                                deparse( substitute( artifact ) ))
-	#              ) -> md5hash
-	stopifnot( is.logical( c( archiveData, archiveTags, archiveMiniature, archiveSessionInfo,
-														force, rememberName, silent, ascii ) ) )
-	stopifnot( length(archiveData) == 1, length(archiveTags) == 1,
-						 length(archiveMiniature) == 1, length(force) == 1,
-						 length(archiveSessionInfo) == 1, 
-						 length(rememberName) == 1, length(silent) == 1, length(ascii) == 1)
-	#   stopifnot( is.character( format ) & length( format ) == 1 & any(format %in% c("rda", "rdx")) )
-	
-	repoDir <- repo
-	chain <- FALSE
-	###########################
-	###########################
-	##### start saveToRepo ######
-	###########################
-	###########################
-	
-	
-	md5hash <- digest( artifact )
-	objectName <- deparse( substitute( artifact ) )
-	
-	repoDir <- checkDirectory( repoDir )
-	
-	# check if that artifact might have been already archived
-	check <- executeSingleQuery( dir = repoDir , realDBname = TRUE,
-															 paste0( "SELECT * from artifact WHERE md5hash ='", md5hash, "'") )[,1] 
-	
-	if ( length( check ) > 0 & !force ){
-		stop( paste0("Artifact ",md5hash," was already archived. If you want to achive it again, use force = TRUE. \n"))
-	} 
-	if ( length( check ) > 0 & force & !silent){
-		if ( rememberName ){
-			warning( paste0("Artifact ",md5hash," was already archived. Another archivisation executed with success."))
-		}else{
-			warning( "This artifact's data was already archived. Another archivisation executed with success.")
-		}
-	}
-	
-	# save artifact to .rd file
-	if ( rememberName & !(objectName %in% ls(envir = parent.frame(1)))) {
-		warning( paste0("Object with the name ", objectName, ", not found. Saving without name."))
-		rememberName = FALSE
-	}
-	if ( rememberName ){
-		#     if( format == "rda"){
-		save( file = file.path(repoDir,"gallery", paste0(md5hash, ".rda")), ascii = ascii, list = objectName,  envir = parent.frame(1))
-		#     }else{
-		#       saveToRepo2(artifact, filebase = paste0(repoDir,"gallery/", md5hash), ascii = ascii, ...)
-		#     }
-	}else{ 
-		#    assign( value = artifact, x = md5hash, envir = .GlobalEnv )
-		#    save( file = paste0(repoDir, "gallery/", md5hash, ".rda"),  ascii=TRUE, list = md5hash, envir = .GlobalEnv  )
-		assign( value = artifact, x = md5hash, envir = .ArchivistEnv )
-		#     if( format == "rda" ){
-		save( file = file.path(repoDir, "gallery", paste0(md5hash, ".rda")),  ascii=ascii, list = md5hash, envir = .ArchivistEnv  )
-		#     }else{
-		#       saveToRepo2(artifact, filebase = paste0(repoDir,"gallery/", md5hash), ascii = ascii, ...)
-		#     }
-		rm(list = md5hash, envir = .ArchivistEnv)
-	}
-	
-	# add entry to database 
-	if ( rememberName ){
-		addArtifact( md5hash, name = objectName, dir = repoDir ) 
-	}else{
-		addArtifact( md5hash, name = md5hash , dir = repoDir)
-		#   # rm( list = md5hash, envir = .ArchivistEnv ) 
-	}
-	
-	# whether to add Tags
-	if ( archiveTags ) {
-		extractedTags <- extractTags( artifact, objectNameX = objectName )
-		# remove name from Tags
-		if (!rememberName) {
-			extractedTags <- extractedTags[!grepl(extractedTags, pattern="^name:")]
-		}
-		derivedTags <- attr( artifact, "tags" ) 
-		sapply( c( extractedTags, userTags, derivedTags), addTag, md5hash = md5hash, dir = repoDir )
-		# attr( artifact, "tags" ) are Tags specified by an user
-	}
-	
-	# whether to archive session_info
-	if ( archiveSessionInfo ){
-		if (!requireNamespace("devtools", quietly = TRUE)) {
-			stop("devtools package required for archiveSessionInfo parameter")
-		}
-		si <- devtools::session_info()
-		md5hashDF <- archive( si, archiveData = FALSE, repo = repo, user = user, 
-													commitMessage = paste0("session_info for", md5hash),
-													password = password,
-													rememberName = FALSE, archiveTags = FALSE, force=TRUE,
-													userTags = paste0("session_info:", md5hashDF))
-		#addTag( tag = paste0("session_info:", md5hashDF), md5hash = md5hash, dir = repoDir )
-	}
-	
-	# whether to archive data 
-	# if chaining code is used, the "data" attr is not needed
-	if ( archiveData & !chain ){
-		attr( md5hash, "data" )  <-  extractData( artifact, parrentMd5hash = md5hash, 
-																							parentDir = repoDir, isForce = force, ASCII = ascii )
-	}
-	if ( archiveData & chain ){
-		extractData( artifact, parrentMd5hash = md5hash, 
-								 parentDir = repoDir, isForce = force, ASCII = ascii )
-	}
-	
-	# whether to archive miniature
-	if ( archiveMiniature )
-		extractMiniature( artifact, md5hash, parentDir = repoDir ,... )
-	
-	###########################
-	###########################
-	##### end saveToRepo ######
-	###########################
-	###########################
+		
+	archivist::saveToRepo(artifact = artifact, ...) -> md5hash
 	
 	# commit
 	# new rows in backpack.db
@@ -261,32 +110,18 @@ archive <- function(artifact, commitMessage = aoptions("commitMessage"),
 										 		 value = TRUE)))
 	
 	if (is.null(commitMessage)){
-		new_commit <- commit(repo, paste0("archivist: add ", md5hash))
+		new_commit <- git2r::commit(repo, paste0("archivist: add ", md5hash))
 	} else {
-		new_commit <- commit(repo, commitMessage)
+		new_commit <- git2r::commit(repo, commitMessage)
 	}
 	
-	
-	#   # skojarzenie lokalnego repozytorium z repozytorium na githubie
-	#   remote_add(repoLocal,
-	#              "upstream2",
-	#              paste0("https://github.com/",user,"/",repo,".git"))
-	
 	# authentication with GitHub
-	cred <- cred_user_pass(user,
-												 password)
+	cred <- cred_user_pass(user, password)
 	
-	# wyslanie do repozytorium na githubie
-	push(repo,
-			 #name = "upstream2",
-			 refspec = "refs/heads/master",
-			 credentials = cred)
+	# push to github
+	git2r::push(repo, refspec = "refs/heads/master", credentials = cred)
 	
-	#   hook <- paste0("archivist::aread(\"",user,"/",repoName,"/",md5hash,"\")")
-	#   
-	#   cat(hook, "\n\n")
-	
-	if (alink) {
+  if (alink) {
 		alink(paste0(user,"/",repoName,"/",md5hash),...)
 	} else {
 		return(paste0(user,"/",repoName,"/",md5hash))

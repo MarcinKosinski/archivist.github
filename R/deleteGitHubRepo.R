@@ -74,28 +74,28 @@ deleteGitHubRepo <- function(repo,
 	stopifnot(is.character(user) & length(user)==1)
 	
 	if (deleteRoot) {
-		DELETE(url = file.path("https://api.github.com/repos",user,repo),
+		httr::DELETE(url = file.path("https://api.github.com/repos",user,repo),
 					 config = httr::config(token = github_token)
 		) -> resp
 	} else {
 		tempfile() -> tmpDir
 		# clone repo to tmpDir
-		cloneGithubRepo(file.path("https://github.com/", user, repo), 
+		cloneGitHubRepo(file.path("https://github.com/", user, repo), 
 										repoDir = tmpDir) -> clonedRepo
 		# remove archivist-repository
-		deleteLocalRepo(repoDir = file.path(tmpDir, 
+		archivist::deleteLocalRepo(repoDir = file.path(tmpDir, 
 																				ifelse(is.null(subdir), "", subdir)
 		))
 		# add changes to git 
-		add(clonedRepo, c("backpack.db", "gallery/"))
+		git2r::add(clonedRepo, c("backpack.db", "gallery/"))
 		# message
-		delete_commit <- commit(clonedRepo, "archivist Repository deletion.")
+		delete_commit <- git2r::commit(clonedRepo, "archivist Repository deletion.")
 		# GitHub authorization
 		# to perform pull and push operations
 		cred <- git2r::cred_user_pass(user,
 																	password)
 		# push archivist-like Repository deletion to GitHub
-		push(clonedRepo,
+		git2r::push(clonedRepo,
 				 refspec = "refs/heads/master",
 				 credentials = cred)
 		

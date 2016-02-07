@@ -1,10 +1,10 @@
 language: r
+r_github_packages:
+  - pbiecek/archivist
 r_packages:
-	- archivist
   - git2r
-  - httr
-  - RSQLite
   - testthat
   - knitr
+  - jsonlite
+  - RCurl
 sudo: required
-

@@ -19,7 +19,8 @@ Imports:
     archivist,
     httr,
     git2r,
-    magrittr
+    jsonlite,
+    RCurl
 Suggests:
     testthat,
     knitr
