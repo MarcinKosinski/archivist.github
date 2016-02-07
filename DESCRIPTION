@@ -1,0 +1,30 @@
+Package: archivist.github
+Version: 0.0.1
+Type: Package
+Title: Tools for Archiving, Managing and Sharing R Objects via GitHub
+Authors@R: c(
+    person("Przemyslaw", "Biecek", role = c("aut"),
+    email = "przemyslaw.biecek@gmail.com"),
+    person("Marcin", "Kosinski", role = c("aut", "cre"),
+    email = "m.p.kosinski@gmail.com")
+    )
+Description: The extension of the archivist package that integrates the archivist with GitHub via GitHub API and the git2r package. 
+Repository: CRAN
+License: GPL-2
+LazyLoad: yes
+LazyData: yes
+Depends:
+    R (>= 3.2.0)
+Imports:
+    archivist,
+    httr,
+    git2r,
+    magrittr
+Suggests:
+    testthat,
+    knitr
+BugReports: https://github.com/MarcinKosinski/archivist.github/issues
+RoxygenNote: 5.0.1
+VignetteBuilder: knitr
+NeedsCompilation: no
+
