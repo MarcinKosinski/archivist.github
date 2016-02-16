@@ -30,8 +30,8 @@ parameter.}
 \description{
 \code{archive} stores artifacts in the local \link{Repository} and automatically pushes archived
 artifacts to the Github \code{Repository} with which the local \code{Repository} is synchronized
-(via \link{createEmptyGithubRepo} or \link{cloneGithubRepo}). Function stores artifacts on the same
-way as \link{saveToRepo} function.
+(via \link{createGitHubRepo} or \link{cloneGitHubRepo}). Function stores artifacts on the same
+way as \link{saveToLocalRepo} function.
 }
 \details{
 To learn more about  \code{Archivist Integration With GitHub} visit \link{agithub}.
@@ -39,7 +39,7 @@ To learn more about  \code{Archivist Integration With GitHub} visit \link{agithu
 \examples{
 \dontrun{
 
-# empty Github Repository creation
+# empty GitHub Repository creation
 
 library(httr)
 myapp <- oauth_app("github",
@@ -53,7 +53,7 @@ aoptions("github_token", github_token)
 aoptions("user", user)
 aoptions("password", user)
 
-createEmptyGithubRepo("archive-test4", default = TRUE)
+createGitHubRepo("archive-test4", default = TRUE)
 ## artifact's archiving
 exampleVec <- 1:100
 
@@ -71,10 +71,10 @@ aread(md5hash_path)
 # clone example
 unlink("archive-test", recursive = TRUE)
 cloneGithubRepo('https://github.com/MarcinKosinski/archive-test')
-setGithubRepo(aoptions("user"), "archive-test")
+setRemoteRepo(aoptions("user"), "archive-test")
 data(iris)
 archive(iris)
-showGithubRepo()
+showRemoteRepo()
 
 ## alink() option
 vectorLong <- 1:100
@@ -82,7 +82,7 @@ vectorShort <- 1:20
 # archiving
 alink(archive(vectorLong))
 archive(vectorShort, alink = TRUE)
-showGithubRepo()
+showRemoteRepo()
 
 
 }

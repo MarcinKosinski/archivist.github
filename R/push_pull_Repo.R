@@ -44,9 +44,9 @@
 #' aoptions("name", user.name)
 #' aoptions("password", user.password)
 #' 
-#' createEmptyGithubRepo("Museum", default = TRUE) # here github_token is used
+#' createGitHubRepo("Museum", default = TRUE) # here github_token is used
 #' data(iris)
-#' saveToRepo(iris)
+#' saveToLocalRepo(iris)
 #' git2r::status(repository('Museum'))
 #' pushGitHubRepo(commitMessage = "add iris")
 #' git2r::status(repository('Museum'))

@@ -1,22 +1,14 @@
 .onAttach <- function(...) {
-   setDefaultArchivistEnv()
-   packageStartupMessage("archivist.github ver ", utils::packageVersion("archivist"), "")
+   packageStartupMessage("Welcome to archivist.github (ver: ", utils::packageVersion("archivist.github"), ").")
 }
 
 .onLoad <- function(...) {
   
-  assign( x = "sqlite", value = dbDriver( "SQLite" ), envir = .ArchivistEnv )
-  assign( x = "readmeDescription", value = "A Repository of Artifacts supported by [archivist](https://github.com/pbiecek/archivist) \n\n
+  archivist::aoptions("readmeDescription", "A Repository of Artifacts supported by [archivist](https://github.com/pbiecek/archivist) \n\n
   [`Repository`](https://github.com/pbiecek/archivist/wiki/archivist-package-Repository) stores specific values of an artifact,
-  different for various artifact's classes and artifacts themselves. To learn more about artifacts visit [wiki](https://github.com/pbiecek/archivist/wiki).",
-  envir = .ArchivistEnv )
-  assign( x = "repoDescription", value = "A Repository of Artifacts supported by archivist https://github.com/pbiecek/archivist",
-  envir = .ArchivistEnv )
-  
-}
-
-onUnload <- function( libpath ){
-  dbUnloadDriver(get( "sqlite", envir = .ArchivistEnv )) 
+  different for various artifact's classes and artifacts themselves. To learn more about artifacts visit [wiki](https://github.com/pbiecek/archivist/wiki).")
+  archivist::aoptions("repoDescription", "A Repository of Artifacts supported by archivist https://github.com/pbiecek/archivist")
+    
 }
 
 ## no S4 methodology here; speedup :

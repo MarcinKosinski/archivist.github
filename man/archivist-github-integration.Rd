@@ -10,18 +10,18 @@ Set of functions to integrate \link[archivist]{archivist-package} with
 GitHub API \href{https://developer.github.com/v3/}{https://developer.github.com/v3/}.
 
 It is possible to create new GitHub repository with an empty \pkg{archivist}-like \link{Repository}
-with \link{createEmptyGithubRepo} function. 
+with \link{createGitHubRepo} function. 
 
 \link{archive} stores artifacts in the Local
-\code{Repository} and automatically pushes archived artifacts to the Github
+\code{Repository} and automatically pushes archived artifacts to the GitHub
 \code{Repository} with which the Local \code{Repository} is synchronized. 
 
-\link{cloneGithubRepo} clones GitHub Repository into the local directory.
+\link{cloneGitHubRepo} clones GitHub Repository into the local directory.
 
-\link{deleteGithubRepo} can delete whole GitHub-Repository or only archivist-like Repository
+\link{deleteGitHubRepo} can delete whole GitHub-Repository or only archivist-like Repository
 stored on a GitHub-Repository.
 
-\link{pushRepo} and \link{pullRepo} synchronize Local and GitHub (remote) Repository.
+\link{pushGitHubRepo} and \link{pullGitHubRepo} synchronize Local and GitHub (remote) Repository.
 }
 \details{
 To use this set of functionalities, one firstly has to authorize himselft to the GitHub API.
@@ -64,10 +64,10 @@ aoptions("name", user.name)
 aoptions("password", user.password)
 
 ## here github_token is used
-createEmptyGithubRepo("Museum")
-createEmptyGithubRepo("Museum-Extras", response = TRUE)
-createEmptyGithubRepo("Gallery", readme = NULL)
-createEmptyGithubRepo("Landfill", repoDescription = "My models and stuff")                                                                
+createGitHubRepo("Museum")
+createGitHubRepo("Museum-Extras", response = TRUE)
+createGitHubRepo("Gallery", readme = NULL)
+createGitHubRepo("Landfill", repoDescription = "My models and stuff")                                                                
 
 }
 }

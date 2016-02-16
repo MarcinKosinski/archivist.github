@@ -43,17 +43,17 @@
 #' aoptions("password", user_password)
 #' 
 #' createEmptyGithubRepo("archive-test4")
-#' setGithubRepo(aoptions("name"), "archive-test4")
+#' setRemotebRepo(aoptions("name"), "archive-test4")
 #' ## artifact's archiving
-#' przyklad <- 1:100
+#' example <- 1:100
 #' 
 #' # archiving
-#' archive(przyklad) -> md5hash_path
+#' archive(example) -> md5hash_path
 #' 
 #' ## proof that artifact is really archived
-#' showGithubRepo() # uses options from setGithubRepo
+#' showRemoteRepo() # uses options from setGithubRepo
 #' # let's remove przyklad
-#' rm(przyklad)
+#' rm(example)
 #' # and load it back from md5hash_path
 #' aread(md5hash_path)
 #' 
@@ -61,13 +61,13 @@
 #' # clone example
 #' unlink("archive-test", recursive = TRUE)
 #' cloneGitHubRepo('https://github.com/MarcinKosinski/archive-test')
-#' setGithubRepo(aoptions("name"), "archive-test")
+#' setRemoteRepo(aoptions("name"), "archive-test")
 #' # equivalent is cloneGitHubRepo('https://github.com/MarcinKosinski/archive-test', default = TRUE)
 #' # check if default is set with
 #' # aoptions('repoDir'); aoptions('repo'); aoptions('user')
 #' data(iris)
 #' archive(iris)
-#' showGithubRepo()
+#' showRemoteRepo()
 #' 
 #' 
 #' }

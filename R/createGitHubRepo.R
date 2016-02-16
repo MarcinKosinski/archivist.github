@@ -5,7 +5,7 @@
 #'
 #' @description
 #' 
-#' \code{createGitHubRepo} is a GitHub version of \link{createEmptyLocalRepo} and creates a new GitHub repository 
+#' \code{createGitHubRepo} is a GitHub version of \link{createLocalRepo} and creates a new GitHub repository 
 #' with an empty \pkg{archivist}-like \link{Repository}. It also creates a Local \code{Repository} which is git-synchronized with
 #' new GitHub repository. 
 #' 
@@ -19,7 +19,7 @@
 #' 
 #' All artifacts which are desired to be archived are going to be saved in the local Repository, which is an SQLite 
 #' database stored in a file named \code{backpack}. 
-#' After calling \code{saveToRepo} function, each artifact will be archived in a \code{md5hash.rda} file. 
+#' After calling \code{saveToLocalRepo} function, each artifact will be archived in a \code{md5hash.rda} file. 
 #' This file will be saved in a folder (under \code{repoDir} directory) named 
 #' \code{gallery}. For every artifact, \code{md5hash} is a unique string of length 32 that is produced by
 #' \link[digest]{digest} function, which uses a cryptographical MD5 hash algorithm.
@@ -33,7 +33,7 @@
 #' Besides the \code{backpack} database, \code{gallery} folder is created in which all 
 #' artifacts will be archived.
 #' 
-#' After every \code{saveToRepo} call the database is refreshed. As a result, the artifact is available 
+#' After every \code{saveToLocalRepo} call the database is refreshed. As a result, the artifact is available 
 #' immediately in \code{backpack.db} database for other collaborators.
 #' 
 #' @param repoDir A character that specifies the directory for the Repository which is to be made. While working with GitHub Repository, this will
@@ -41,7 +41,7 @@
 #' 
 #' @param default If \code{default = TRUE} then \code{repoDir} (\code{repo}) is set as default local repository. Also the \code{user} is set as default GitHub user.
 #' 
-#' @param ... further arguments passed to \link{createEmptyLocalRepo} such as \code{force}.
+#' @param ... further arguments passed to \link{createLocalRepo} such as \code{force}.
 #' 
 #' @param repo While working with a Github repository. A character denoting new GitHub repository name. White spaces will be substitued with a dash.
 #' @param github_token While working with a Github repository. An OAuth GitHub Token created with the \link{oauth2.0_token} function. See \link{archivist-github-integration}.
@@ -61,33 +61,6 @@
 #'
 #' @examples
 #' \dontrun{
-#' exampleRepoDir <- tempfile()
-#' createEmptyRepo( repoDir = exampleRepoDir )
-#'
-#' # check the state of an empty Repository
-#' 
-#' summaryLocalRepo(  repoDir = exampleRepoDir )
-#' showLocalRepo( exampleRepoDir )
-#' 
-#' # creating a Repository in non existing directory
-#' 
-#' createEmptyLocalRepo( "xyzdd234") # force = TRUE is default argument
-#'
-#' # creating a default local Repository in non existing directory
-#' 
-#' createEmptyRepo("def", default = TRUE) 
-#' data(iris)
-#' saveToRepo(iris) # We don't have to specify repoDir parameter
-#' showLocalRepo() # because repoDir="def" is default 
-#'
-#'  # removing an example Repositories
-#' 
-#' deleteRepo( exampleRepoDir, TRUE)
-#' deleteRepo( "xyzdd234", TRUE)
-#' deleteRepo("def", TRUE)
-#' 
-#' rm( exampleRepoDir )
-#' 
 #' ## GitHub version
 #' 
 #' library(httr)
@@ -110,7 +83,7 @@
 #'         
 #'         
 #'         
-#' # empty Github Repository creation
+#' # empty GitHub Repository creation
 #' 
 #' library(httr)
 #' myapp <- oauth_app("github",
@@ -132,7 +105,7 @@
 #' archive(przyklad) -> md5hash_path
 #' 
 #' ## proof that artifact is really archived
-#' showGithubRepo() # uses options from setGithubRepo
+#' showRemoteRepo() # uses options from setGithubRepo
 #' # let's remove przyklad
 #' rm(przyklad)
 #' # and load it back from md5hash_path
@@ -142,10 +115,10 @@
 #' # clone example
 #' unlink("archive-test", recursive = TRUE)
 #' cloneGithubRepo('https://github.com/MarcinKosinski/archive-test')
-#' setGithubRepo(aoptions("user"), "archive-test")
+#' setRemoteRepo(aoptions("user"), "archive-test")
 #' data(iris)
 #' archive(iris)
-#' showGithubRepo()
+#' showRemoteRepo()
 #' 
 #' }
 #' @family archivist.github
@@ -215,7 +188,7 @@ createGitHubRepo <- function(repo,
 	#git2r::config(repo, ...) # if about to use, the add to archivist-package.R
 	
 	# archivist-like Repository creation
-	archivist::createEmptyLocalRepo(repoDir = repoDir_path, ...)
+	archivist::createLocalRepo(repoDir = repoDir_path, ...)
 	file.create(file.path(repoDir_path, "gallery", ".gitkeep"))
 	# git add
 	if (!is.null(readmeDescription)){

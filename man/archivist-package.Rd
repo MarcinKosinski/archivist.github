@@ -5,15 +5,16 @@
 \alias{archivist-package}
 \title{Tools for Archiving, Managing and Sharing R Objects via GitHub}
 \description{
-TODO
+GitHub integration extension of the \pkg{archivist} package - tool for dtoring, 
+restoring and searching for R objects.
 }
 \details{
 For more detailed information visit \pkg{archivist} \code{wiki} on 
 \href{https://github.com/pbiecek/archivist/wiki}{Github}.
 }
 \author{
-Przemyslaw Biecek [aut, cre] \email{przemyslaw.biecek@gmail.com} \cr
-Marcin Kosinski [aut] \email{m.p.kosinski@gmail.com}
+Marcin Kosinski [aut, cre] \email{m.p.kosinski@gmail.com} \cr
+Przemyslaw Biecek [aut] \email{przemyslaw.biecek@gmail.com}
 }
 \seealso{
 Other archivist: \code{\link{archivist-github-integration}},

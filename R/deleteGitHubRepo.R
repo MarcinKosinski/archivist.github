@@ -54,7 +54,7 @@
 #' aoptions("user", user)
 #' aoptions("password", password)
 #' 
-#' createEmptyGithubRepo("Museum")
+#' createGitHubRepo("Museum")
 #' deleteGitHubRepo(repo = "Museum", deleteRoot = TRUE, response = TRUE)
 #' 
 #' }
