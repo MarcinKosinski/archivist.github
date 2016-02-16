@@ -20,6 +20,7 @@
 #' @importFrom httr POST
 #' @importFrom jsonlite unbox
 #' @importFrom RCurl url.exists
+#' @importFrom digest digest
 #' @import archivist
 #' @importMethodsFrom git2r add
 #' @importMethodsFrom git2r commit

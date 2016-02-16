@@ -6,7 +6,8 @@
 \usage{
 archive(artifact, commitMessage = aoptions("commitMessage"),
   repo = aoptions("repo"), user = aoptions("user"),
-  password = aoptions("password"), alink = aoptions("alink"), ...)
+  password = aoptions("password"), alink = aoptions("alink"),
+  artifactName = digest(substitute(artifacts)), ...)
 }
 \arguments{
 \item{artifact}{An artifact to be archived on Local and Github \link{Repository}.}
@@ -24,6 +25,8 @@ See \link{agithub}.}
 
 \item{alink}{Logical. Whether the result should be put into \link{alink} function. Pass further arguments with \code{...}
 parameter.}
+
+\item{artifactName}{The name of the artifact with which it should be archived. If \code{NULL} then object's MD5 hash will be used instead.}
 
 \item{...}{Further arguments passed to \link{alink} and \link{saveToRepo} functions.}
 }

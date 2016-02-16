@@ -20,10 +20,11 @@
 #'  See \link{agithub}.
 #' @param password A character denoting GitHub user password. Can be set globally with \code{aoptions("password", password)}.
 #' See \link{agithub}.
-#' @param ... Further arguments passed to \link{alink} and \link{saveToRepo} functions.
+#' @param artifactName The name of the artifact with which it should be archived. If \code{NULL} then object's MD5 hash will be used instead.
+#' @param ... Further arguments passed to \link{saveToLocalRepo} function.
 #' 
-#' @param alink Logical. Whether the result should be put into \link{alink} function. Pass further arguments with \code{...}
-#' parameter.
+#' @param alink Logical. Whether the result should be put into \link{alink} function. If you would like to pass further arguments to \code{alink} then
+#' you should specify them with \link{aptions} in this case.
 #' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
@@ -87,15 +88,16 @@ archive <- function(artifact,
 										user = aoptions("user"),
 										password = aoptions("password"),
 										alink = aoptions("alink"),
+										artifactName = digest(substitute(artifacts)),
 										...){
-	stopifnot(is.character(c(repo, user, password, commitMessage)))
-	stopifnot(length(repo) == 1, 
-						length(user) == 1,
-						length(password) == 1,
-						length(commitMessage) == 1)
+	stopifnot(is.character(c(repo, user, password)))
+	stopifnot(is.null(commitMessage) | (length(commitMessage) == 1 & is.character(commitMessage)))
+	stopifnot(length(repo) == 1, length(user) == 1,	length(password) == 1)
 	stopifnot(is.logical(alink) & length(alink) == 1)
 		
-	archivist::saveToRepo(artifact = artifact, ...) -> md5hash
+	# archive Locally
+	assign(x = artifactName, value = artifact)
+	archivist::saveToRepo(artifact = artifact, artifactName = artifactName, ...) -> md5hash
 	
 	# commit
 	# new rows in backpack.db
@@ -122,7 +124,7 @@ archive <- function(artifact,
 	git2r::push(repo, refspec = "refs/heads/master", credentials = cred)
 	
   if (alink) {
-		alink(paste0(user,"/",repoName,"/",md5hash),...)
+		alink(paste0(user,"/",repoName,"/",md5hash))
 	} else {
 		return(paste0(user,"/",repoName,"/",md5hash))
 	}

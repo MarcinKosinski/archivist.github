@@ -1,5 +1,5 @@
 Package: archivist.github
-Version: 0.0.2
+Version: 0.0.3
 Type: Package
 Title: Tools for Archiving, Managing and Sharing R Objects via GitHub
 Authors@R: c(
@@ -20,7 +20,8 @@ Imports:
     httr,
     git2r,
     jsonlite,
-    RCurl
+    RCurl,
+    digest
 Suggests:
     testthat,
     knitr
