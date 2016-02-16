@@ -7,5 +7,3 @@
 
 Tools for Archiving, Managing and Sharing R Objects via GitHub
 =====================================================
-
-# archivist.github
