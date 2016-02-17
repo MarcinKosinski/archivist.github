@@ -3,7 +3,6 @@ r_packages:
   - git2r
   - archivist
   - jsonlite
-  - R.ssp
   - httr
   - digest
 sudo: required
