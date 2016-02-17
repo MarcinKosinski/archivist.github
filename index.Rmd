@@ -1,0 +1,494 @@
+---
+title: "archivist.github: archivist and GitHub integration"
+subtitle: "Use case with [RTCGA](https://github.com/RTCGA) data"
+author: "Marcin Kosiński"
+date: '2016-31-01'
+output:
+  html_document:
+    theme: flatly
+    number_sections: yes
+    toc: yes
+    toc_depth: 2
+    fig_width: 12
+    fig_height: 8 
+---
+
+
+```{r, echo=FALSE}
+library(knitr)
+opts_chunk$set(comment="", message=FALSE, warning = FALSE, 
+               tidy.opts=list(keep.blank.line=TRUE, width.cutoff=150),
+							 options(width=150), eval = TRUE)
+```
+
+Have you ever suffered because of the impossibility of reproducing graphs, tables or analysis results in R? Have you ever bothered yourself for not being able to share R objects (i.e. plots or final analysis models) within your reports, posters or articles? Or maybe simply you have too many objects you can't manage to store in a convenient and handy way? Now you can share partial results of analysis, provide hooks to valuable R objects within articles, manage analysis results and restore objects' pedigree with `archivist` package and it's extension `archivist.github`. All automatically through GitHub without closing RStudio. If you are tired of archiving results by yourself, then read this tutorial.
+
+
+
+# Introduction
+
+Open science needs not only reproducible research but also accessible final and partial results. 
+
+```{r}
+library(archivist.github)
+# described functionalities are implemented in the 2.0 version or achivist and 0.1 of archivist.github
+# devtools::install_github('MarcinKosinski/archivist.github') 
+```
+
+The `archivist` is an R package for data analysis results management, which helps in managing, sharing, storing, linking and searching for R objects. The `archivist` package automatically retrieves the object’s meta-data and creates a rich structure that allows for easy management of calculated R objects. It also extends the reproducible research paradigm by creating new ways to retrieve and validate previously calculated objects. 
+
+This use case describes how `archivist` can be integrated with [GitHub](https://github.com) so that one can share (partial) results of his analysis in a more automatic and simpler way. GitHub is a platform on which collaborators can share their analysis code, figures and reports. It is also possible to share `R` objects which are crucial to the analysis or which calculations took a great amount of time or required a special software. Such objects are referred as *artifacts*. One might be only interested in a partial or final result without executing the whole analysis, which sometimes might be impossible due to lack of software, changes in `R` packages or simply takes to much time. If you are not using any version control system (like Git, hence GitHub), then get motivated [here](http://www.howtogeek.com/180167/htg-explains-what-is-github-and-what-do-geeks-use-it-for/) and [here](http://www.makeuseof.com/tag/git-version-control-youre-developer/).
+
+The `archivist` is a tool that makes sharing `R` objects more convenient and transparent. Such objects can even be added to StackOverfow questions to improve providing reproducible examples (like [here](http://stackoverflow.com/questions/29653816/is-there-a-way-to-add-legend-next-to-a-dygraph-in-r-not-exactly-on-the-plot)).
+
+# Working with GitHub repository
+
+GitHub API `OAuth` open autorization and `archivist.github` functions that are integrated with GitHub are described in an `R` documentation page accesed with `?agithub`. Information below provides broader explanation. New functions from `archivist.github` extension can be seen in below workflow
+
+<img src="archivist.github_workflow_ver2.png" alt="archivist.github" style="width:912px;height:410px;">
+
+## `OAuth` open autorization
+
+To start sharing code and analysis results on GitHub a data scientist needs to create a repository on GitHub first. It can be done manually under this link https://github.com/new or one can use the `createGitHubRepo()` function to do this automatically. The `createGitHubRepo()` function integrates with the [GitHub API](https://developer.github.com/v3/) which enables performing operation on GitHub with a
+*simple* `curl` ([`"see URL"`](https://en.wikipedia.org/wiki/CURL)) - requests (if a data scientist comes with an IT background it's easy, but when he's background is different it is not so obvious). If you haven't worked earlier with API and are wondering why they are so important and broadly used, then get keen on [here](http://readwrite.com/2013/09/19/api-defined).
+
+Working with GitHub API requires creating a simple developer application (you can create it under this link https://github.com/settings/applications/new) which will be used to authenticate your `curl` requests (created via [`httr`](https://github.com/hadley/httr) package). It can be done once to benefit from it in future work. When application is created, one will have to copy its `Client ID` and `Client Secret` to authorize his computer with this application by running
+
+```{r, echo=FALSE}
+library(httr)
+load('github_token.rda')
+user = 'MarcinKosinski'
+load('password.rda')
+```
+
+
+```{r, eval=FALSE}
+library(httr)
+myapp <- oauth_app("github",
+                   key = app_key,
+                   secret = app_secret)
+github_token <- oauth2.0_token(oauth_endpoints("github"),
+                               myapp,
+                               scope = c("public_repo",
+                                         "delete_repo"))
+```
+
+The above command created a `github_token` that uses `OAuth` open autorization system. 
+
+> OAuth allows notifying a resource provider (e.g. Facebook) that the resource owner (e.g. you) grants permission to a third-party (e.g. a Facebook Application) access to their information (e.g. the list of your friends).
+
+More about `OAuth` is explained in that [StackOverflow answer](http://stackoverflow.com/a/4201618/3857701).
+
+The `scope` parameter in the `oauth2.0_token` function lets you specify exactly what type of access you need. Scopes *limit* access for `OAuth` tokens. They do not grant any additional permission beyond that the user already has. In this example we granted read/write access to code, commit statuses, collaborators, and deployment statuses for public repositories and organizations, which are required for starring public repositories (`public_repo`). We also granted access to delete adminable repositories (`delete_repo`). More possible values of `scope` for GitHub API `OAuth` token can be found in [this table](https://developer.github.com/v3/oauth/#scopes).
+
+## Create or clone your repository
+
+When `github_token` is created one can set it up as a global `github_token` visible for most `archivist` functions with
+
+```{r}
+aoptions("github_token", github_token)
+aoptions("user", user) # user = 'MarcinKosinski'
+invisible(aoptions("password", password))
+```
+
+What is more, one can specify GitHub's `user.name` and `user.password` globally, so that future integration with Git/GitHub (i.e. commits or pushes) can be performed (with the great power of [`git2r`](https://github.com/ropensci/git2r) package).
+
+One can create GitHub's repository consisting of the `archivist`-like `Repository` of artifacts with
+
+```{r}
+createGitHubRepo(repo = "Gallery", default = TRUE) 
+# -> https://github.com/MarcinKosinski/Gallery
+```
+
+`Repository` is a folder with an SQLite database stored in a file named `backpack.db` and a subdirectory named `gallery` with collection of objects saved as `.rda` files. To learn more about it visit [`archivist's` Wiki](https://github.com/pbiecek/archivist/wiki/archivist-package-Repository) or run in `R` console `?archivist::Repository`.
+
+The `default = TRUE` option sets `Repository` under link `https://github.com/user.name/repo` as a visible default `Repository` for future `archivist.github` functions. In this way one won't need to pass additional parameters to every functions' calls.
+
+If one already has a GitHub repository with `archivist` Repository it can be cloned and set as default.
+
+```{r, eval=FALSE}
+# eval = FALSE - this line is not evaluated in this tutorial
+cloneGitHubRepo(repoURL = 'https://github.com/MarcinKosinski/Museum/',
+				repoDir = any_local_path_or_NULL,
+				default = TRUE)
+```
+
+When the option `default = TRUE` is used in the above functions, then the global parameters `repo` and `user` start being visible for the `achivist.github` functions. One can check if the parameter is set globally for the `archivist's` functions 
+```{r}
+aoptions('repo')
+aoptions('user')
+```
+
+The globally set `Repository` stored on GitHub is synchronized with a Local `Repository` that can be set (or is already set when `default = TRUE`) in `repoDir` parameter
+
+```{r}
+aoptions('repoDir')
+```
+
+If a user did not specify the `repoDir` argument, during the `Repostiory` creation with `createGitHubRepo()`, it is by default set to the same value as `repo` parameter.
+
+## A simple example of archiving and exploring
+
+Now, when GitHub and `archivist` `Repositories` are created, one can archive and share artifacts (crucial objects) with `archive` function which also allows to emb a hook to the artifact in the report. We are creating `.html` report in [`rmarkdown`](http://rmarkdown.rstudio.com/), so the default markdown formating for hook is used. For $\LaTeX$-like hooks use `format = "latex".
+
+Let us prepare a linear model with `iris` data
+
+```{r}
+iris.lm.model <- lm(Sepal.Length ~ Sepal.Width + Petal.Length + Petal.Width,
+										data= iris)
+```
+
+and let's archive the desired model automatically to the created `Repository` (https://github.com/MarcinKosinski/Gallery).
+
+```{r, results = 'asis'}
+# results = 'asis' - so that a text can be understood as a URL
+archive(iris.lm.model, alink = TRUE)
+```
+
+The `archive` function created a hook to the artifact. One can download this shared artifact by clicking the link or by copying and pasting it's value to R console. It is a great way to provide a hook to the figures in posters or publications that are really an `R` objects (such as `ggplot` class). The object named `iris.lm.model` was archived to the GitHub (and synchronized Local) `Repository`. This is the final implementation of the `archive` prototype we presented at the [BI FORUM](https://budapestbi2015.sched.org/event/4JA8/archivist-managing-data-analysis-results) conference in Budapest in Oct 2015. 
+
+One can check that the artifact is really on GitHub with
+
+```{r, echo = 2:3}
+Sys.sleep(30) # after commit sometimes GitHub does not react so fast so we need to give it a time
+showRemoteRepo(repo = 'Gallery', user = 'MarcinKosinski')
+# showRemoteRepo() would also work since `user` and `repo` are set gobally
+```
+
+The first row corresponds to the archived artifact, the second one corresponds to the archived data extracted from an artifact. The `md5hash` column specifies which MD5 hash (see `?digest::digest`) the artifacts has been connected with.
+Artifacts are archived along with a special attribute named `md5hash`. For each artifact, `md5hash` is a unique string of length 32 that is produced by `digest{digest}` function which uses a cryptographical MD5 hash algorithm. The `md5hash` of each artifact archived to the `Repository` is also saved on the `Repository` along with the artifact's `Tags` (see [`Tags` on `archivist` WIKI](https://github.com/pbiecek/archivist/wiki/archivist-package---Tags)). It enables to distinguish objects in the `Repository` and facilitates searching and loading them.
+
+Each artifact can be archived with its unique `Tags` which are attributes of an artifact. They can be the artifact's name, class or archiving date. Furthermore, for various artifact's classes different `Tags` are available. Let us archive one more artifact to explain how various `Tags` can be extracted during archiving and let us even specify our own `userTags`.
+
+```{r, results = 'asis'}
+# results = 'asis' - so that a text can be understood as a URL
+iris.lm.model.smry <- summary(iris.lm.model)
+archive(iris.lm.model.smry, alink = TRUE, 
+		userTags = paste0("summaryOf:", digest::digest(iris.lm.model)))
+```
+
+One can check  what `Tags` have been extracted so far
+
+```{r}
+Sys.sleep(300) 
+# After a commit sometimes GitHub does not react so fast
+# so we need to give it a time.
+# Immiediate access depends on github.com performance
+showRemoteRepo(method = "tags")
+```
+
+or more convenient form for [`dplyr`](https://github.com/hadley/dplyr) grouping and aggregation operations (thanks to [`@eliotmcintire`](github.com/eliotmcintire) for the suggestion and [`@wchodor`](github.com/wchodor) for the implementation - [issue](https://github.com/pbiecek/archivist/issues/91)).
+
+```{r}
+splitTagsRemote(repo = 'Gallery', user = 'MarcinKosinski')
+
+library(dplyr)
+splitTagsRemote(repo = 'graphGallery', user = 'pbiecek') %>%
+	group_by(tagKey) %>%
+	summarise(count = n()) %>%
+	arrange(desc(count))
+
+library(ggplot2)
+splitTagsRemote(repo = 'graphGallery', user = 'pbiecek') %>%
+	group_by(tagKey) %>%
+	summarise(count = n()) %>%
+	arrange(desc(count)) %>%
+	ggplot(aes(reorder(tagKey, count, max), count)) +
+	geom_bar(stat = "identity") +
+	theme_minimal() + xlab('Number of entries with this Tag') + ylab('Tags') +
+	ggtitle('Barplot of counts of Tags\' types in pbiecek/graphGallery Repository')
+```
+
+Extracting `Tags` for a specific artifact can be done with
+
+```{r}
+getTagsRemote(md5hash = digest::digest(iris.lm.model.smry),
+			  tag = "", user = 'MarcinKosinski', repo = 'Gallery' )
+```
+
+
+After the `Repository` is created and the crucial objects are achived anyone can explore public `archivist` `Repository` shared on GitHub. Knowing the object's `md5hash` one can download it with
+
+```{r}
+loadFromRemoteRepo(md5hash = digest::digest(iris.lm.model.smry),
+				   value = TRUE) -> ddl.iris.lm.model.smry
+ddl.iris.lm.model.smry$sigma
+```
+ 
+ or can explore `Repository` for various objects using their `Tags`. 
+ 
+When one is interested in all objects of class `lm` that were created with `Species` explanatory variable (with `versicolor` factor level) in [`pbiecek/graphGallery`](https://github.com/pbiecek/graphGaller) repository, then one might download them, extract R-squared statistics and coefficients, bind them in one data frame and sort rows by R-squared statistics to get the best model with the following code
+ 
+ 
+```{r}
+mm <- asearch(patterns = c('class:lm',
+                     'coefname:Speciesversicolor'),
+        repo = 'pbiecek/graphGallery')
+
+mm %>%
+  lapply(function(x) {
+    c(r.squared = summary(x)$r.squared,
+      x$coef) %>%
+      # extract coeffs and R-squared statistic
+      t %>%
+      as.data.frame # transpose for binding
+  }) %>% 
+  do.call(dplyr::bind_rows, .) %>% # apply bind_rows to all list elements
+  cbind(data.frame(md5hash = names(mm))) %>%
+  arrange(r.squared) %>% # arrange rows by r.squared
+    unique()
+```
+
+This might be used to extract the most valuable model (in terms of R-squared statistics) within the `Repository`. Imagine a `Repository` with hundreds of classification models and their potentional blends, where each of them is archived with additional `Tags` describing their performance. One gained a great tool to search for the best classifier within dozens of models.
+
+If one would like to extract only `md5hashes` for given `Tags` instead of whole artifacts, then `searchInRemoteRepo()` function can be used
+
+```{r}
+searchInRemoteRepo(pattern = 'name', fixed = FALSE, repo = 'graphGallery', user = 'pbiecek') %>% length
+# return md5hashes of artifacts that have a tag containing a substring `name` 
+searchInRemoteRepo(pattern = c('class:ggplot', 'class:lm'),
+				  		repo = 'graphGallery', user = 'pbiecek',
+						intersect = FALSE) %>% length
+```
+
+Desired artifacts can even be copied to our Local `Repository` from GihHub
+
+```{r}
+searchInRemoteRepo(pattern = c('class:ggplot', 'class:lm'),
+				  		repo = 'graphGallery', user = 'pbiecek',
+						intersect = FALSE)[1:3] %>%
+	copyRemoteRepo(md5hashes = ., user = 'pbiecek', repo = 'graphGallery',
+				   repoTo = 'Gallery')
+showLocalRepo(repoDir = 'Gallery')
+```
+
+
+# Advanced example with [RTCGA](https://github.com/RTCGA) data
+
+## Aim
+
+Let's have a look at more advanced example. Suppose we would like to create a similar graph to this one but with slightly different input data.
+
+```{r}
+aread('MarcinKosinski/coxphSGD/db03267b063709277e50bd4c0c1ddb04') -> survival.egfr.plot
+class(survival.egfr.plot)
+# this object is a result of survMisc:::autoplot.survfit function which mainly
+# produces a list containing 2 ggplot objects
+
+survival.egfr.plot$plot <- survival.egfr.plot$plot +
+	ggtitle('Survival vs mutation in EGFR gene')  # the previous title was in polish
+survMisc::autoplot(survival.egfr.plot) # it will plot survival plot and risk set table
+```
+
+The plot presents the Kaplan-Meier estimates of the survival curves for patients suffering from cancer, divided into 2 groups: one with a mutation in EGFR gene (`EGFR=1`) and the other without it (`EGFR=0`). The mutation can be a deletion, amplification etc.. 
+
+## About [RTCGA]((https://github.com/RTCGA))
+
+The data used to produce previous plot came from [*The Cancer Genome Atlas*](http://cancergenome.nih.gov/abouttcga) Study.
+
+> The Cancer Genome Atlas (TCGA) is a comprehensive and coordinated effort to accelerate our understanding of the molecular basis of cancer through the application of genome analysis technologies, including large-scale genome sequencing. 
+
+The download of data through `R` is possible with the [`RTCGA`](http://bioconductor.org/packages/RTCGA/) package but most of useful datasets are already converted and available in the [`RTCGA family`](http://github.com/RTCGA/) of `R` data packages.
+
+## Partial results archiving and objects' pedigree restoration
+
+The main plot of this use case was made from the data of patients suffering from one of all available cancer types in TCGA study (there are [38 available cohorts types](http://gdac.broadinstitute.org/) to download). Let us prepare such plot only for patients suffering from Breast invasive carcinoma (Breast Cancer - BRCA), divided into groups related to the existence of the mutation in a EGFR gene and the expression of a gene TP53 (over and below the median in BRCA cohort).
+
+To do so one would need to perform a few data operations such as observations filtering, column tranformations and tables merging. The very convenient set of tools to munge data are [`dplyr`](https://github.com/hadley/dplyr) and forward-pipe operator from [`magrittr`](https://cran.r-project.org/web/packages/magrittr/vignettes/magrittr.html) package. We have borrowed the `%>%` forward-pipe operator from `magrittr` version 1.0.1 and created our own archivist-forward-pipe operator `?```%a``` which not only passes the results of the previous function to the next one, but also archives the inputs off all operations so that one can create a hooks to every partial result of forward-pipe operation/analysis. 
+
+I am a really keen on long forward-pipe operations so I'll try my best to create a good one, which will join information about clinical state of a patient with the information about the existence of an PIK3CA gene mutations (which is the most common for BRCA) and the information about expression of a gene TP53 (which is believed to be a guardian of the genome).
+
+```{r}
+library(RTCGA.rnaseq); data(BRCA.rnaseq) # information about genes' expressions
+library(RTCGA.mutations); data(BRCA.mutations) # information about genes' mutations
+library(RTCGA.clinical); data(BRCA.clinical) # patients' clinical data
+
+aoptions('silent', TRUE) # This sets `silent=TRUE` in saveToRepo which is used by %a% . There will be no warning printed about archiving the same artifact or it's data twice.
+
+BRCA.rnaseq %a%
+	select(`TP53|7157`, bcr_patient_barcode) %a%
+	# bcr_patient_barcode contains a key to merge patients between various datasets
+	rename(TP53 = `TP53|7157`) %a%
+	filter(substr(bcr_patient_barcode, 14, 15) == "01" ) %a% 
+	# 01 at the 14-15th position tells these are cancer sample
+	mutate(bcr_patient_barcode = substr(as.character(bcr_patient_barcode),1,12)) -> 
+	# in clinical info bcr_patient_barcode is only of length 12
+	BRCA.rnaseq.TP53
+
+BRCA.mutations %a%
+	select(Hugo_Symbol, bcr_patient_barcode) %a%
+	# Hugo_symbol tells to which gene the row corresponds.
+	# Ff the rows exist for a gene, this means there was a mutation for this patient for this gene.
+	filter(nchar(bcr_patient_barcode)==15) %a%
+	# sometime there are inproper lengths of this code
+	filter(substr(bcr_patient_barcode, 14, 15)=="01") %a%	
+	# 01 at the 14-15th position tells these are cancer sample
+	filter(Hugo_Symbol == 'PIK3CA') %a%
+	# we are interested only in the mutations of PIK3CA
+	unique() %a% 
+  # sometimes there are few mutations in the same gene
+	mutate(bcr_patient_barcode = substr(as.character(bcr_patient_barcode),1,12)) -> 
+	# in clinical info bcr_patient_barcode is only of length 12
+	BRCA.mutations.PIK3CA
+
+BRCA.clinical %a%
+	select(patient.bcr_patient_barcode,
+		   patient.vital_status, # information whether patient is still alive
+		   patient.days_to_last_followup, # how many days has patient been observed if he is alive
+		   patient.days_to_death) %a% # how many days has patient been observed if he has passed away
+	mutate(bcr_patient_barcode = toupper(as.character(patient.bcr_patient_barcode))) %a%
+	# in clinical datasets the key column is in lower case and with different name
+	mutate(status = ifelse(as.character(patient.vital_status) == "dead",1,0),
+      	   times = ifelse( 
+      	 				!is.na(patient.days_to_last_followup),
+          				as.numeric(as.character(patient.days_to_last_followup)),
+          				as.numeric(as.character(patient.days_to_death))
+      	 	)) %a%
+	# if the patient does not have a days_to_last_followup time this means
+	# he has days_to_death time
+  	filter(!is.na(times)) %a% 
+  	# sometime patient does not have any time
+	filter(times > 0) -> BRCA.clinical.survival
+  	# sometimes by mistkae patients have non-positive times (few cases)
+
+BRCA.rnaseq.TP53 %a%
+	left_join(y = BRCA.mutations.PIK3CA,
+						by = "bcr_patient_barcode") %a%
+	left_join(y = BRCA.clinical.survival,
+						by = "bcr_patient_barcode") %a%
+	mutate(TP53_HighExpr = ifelse(TP53 >= median(TP53), "1", "0")) %a%
+	mutate(PIK3CA_Mut = as.integer(!is.na(Hugo_Symbol))) %a%
+	select(times, status, TP53_HighExpr, PIK3CA_Mut)  -> BRCA.2survfit
+```
+
+And then one can print artifact's history/pedigree with the `ahistory()` function that works in 3 variants
+```{r}
+ahistory(BRCA.rnaseq.TP53) # regular format
+```
+```{r, results='asis'}
+# additional chunk options: results='asis'
+ahistory(BRCA.mutations.PIK3CA, format = "kable") # uses knitr::kable()
+ahistory(BRCA.2survfit, format = "kable", alink = TRUE ) # give hooks to objects
+# Note that they are not yet available on GitHub, 
+# because the archiving was only to Local Repository.
+
+```
+
+### Overloading `print()` function
+
+The final data would be used to plot the Kaplan-Meier estimates of the survival curves with the use of `my.customized.km()` function.
+
+```{r}
+tail(BRCA.2survfit)
+BRCA.2survfit %>%
+	select(TP53_HighExpr, PIK3CA_Mut, status) %>%
+	table() 
+```
+ `my.customized.km()` function is based on [`survMisc`](https://cran.r-project.org/web/packages/survMisc/index.html) package, which was moved to CRAN archive suddenly. It's implementation/body is too long to write it down here (and unnecessary) but can be imported to `R` with 
+
+```{r}
+# Instead of whole md5hash an abbreviation can be specified.
+# If more that one md5hash matches this abbrevation, then every corresponding artifact is loaded.
+aread('MarcinKosinski/Museum/30efaaedb') -> my.customized.km
+# or loadFromGithubRepo(md5hash = '30efaaedb', user = 'MarcinKosinski', repo = 'Museum')
+
+my.customized.km('times', 'status', c('TP53_HighExpr', 'PIK3CA_Mut'), BRCA.2survfit,
+								 'Survival vs TP53 expression and mutations in PIK3CA') -> km_plot
+class(km_plot)
+```
+
+One can even overload `print` function for a specific class to first perform `archive` operation, then to extract hook in the way that is compatible with the format of report and lastly to print the object. Original idea came from [here](https://github.com/pbiecek/archivist/issues/180) and [here](https://github.com/pbiecek/archivist/issues/74)
+
+```{r, results='asis'}
+print.tableAndPlot  <- function(x, ...) {
+	saveToRepo(x) -> hash
+	cat(alink(hash)) # uses globally set `user` and `repo`
+	survMisc:::autoplot.tableAndPlot(x, ...) 
+}
+# results = 'asis'
+archive(print.tableAndPlot, commitMessage = 'print.tableAndPlot function', alink = TRUE)
+```
+
+```{r, results = 'asis'}
+# results = 'asis'
+print(km_plot)
+```
+
+Easier version of this functionality is described in this Use Case about [addHookToPrint](https://cdn.rawgit.com/pbiecek/archivist/master/scripts/replicationScript.html).
+
+### Pushing Local `Repository` to GitHub
+
+One might have noticed that `%a%` operator and `saveToLocalRepo()` function saved objects only to the Local `Repository` that is synchronized with GitHub. This is different to the `archive` function which archives to the Local and GitHub `Repository` simultaneously. It is possible to `push` (Git command) artifacts that are only present in the Local `Repository` to GitHub equivalent with `pushGitHubRepo` function
+
+```{r}
+# number of artifacts before push
+searchInRemoteRepo(pattern = "name", fixed = FALSE) %>% length
+# one can check how many commits have been performed so far
+length(jsonlite::fromJSON(rawToChar(GET('https://api.github.com/repos/MarcinKosinski/Gallery/commits')$content))$sha)
+pushGitHubRepo() # uses globally set parametrs when none are provided
+# number of artifacts after push
+Sys.sleep(300) # to be sure my request isn't faster than GitHub platform after push
+searchInRemoteRepo(pattern = "name", fixed = FALSE) %>% length
+# one can check how many commits have been performed so far
+length(jsonlite::fromJSON(rawToChar(GET('https://api.github.com/repos/MarcinKosinski/Gallery/commits')$content))$sha)
+```
+
+This operation might be troublesome when other collaborator has pushed his changes to the remote GitHub `Repository`. Sometimes it's better to first `pull` (Git command) changes (new artifacts) from the synchronized Github `Repository`. Working with too many collaborators may occure in Git conflicts in the `backpack.db` file. If you have any ideas or suggestions how can this be handle please write in [this issue](https://github.com/pbiecek/archivist/issues/146). `pullGitHubRepo()` and `pushGitHubRepo()` both have additional parameter `...` enabling passing more sophisticated options to `git2r::pull` and `git2r::push` when more complex conflicts occure.
+
+# `Repository` and `gallery` summaries
+
+It is also possible to create a summary of `gallery` folder, which in other words mean a summary of each artifact stored in `Repository`. Special `createMDGallery()` function creates an `.md` file with hooks to artifacts, their list of `Tags` and if possible their miniature in a form of a `.png` file. By now only plots like `lattice` and `ggplot` object's are saved also with their `.png` miniature and only for those objects mianiture can be added to `gallery` summary.
+
+In the below example we extract `gallery` summary to the `README.md` file which will be appended with additional lines of the summary.
+
+```{r}
+createMDGallery(output = 'Gallery/README.md', addTags = TRUE, addMiniature = TRUE)
+```
+
+The output of this function can be seen in the `README` of `Gallery` `Repository` (https://github.com/MarcinKosinski/Gallery) in which we are working in this tutorial, after it'll be pushed to GitHub with
+```{r}
+pushGitHubRepo(files = 'README.md')
+```
+
+The results is [here](https://github.com/MarcinKosinski/Gallery/blob/master/README.md) and few interesting `gallery` summaries are [here](https://github.com/pbiecek/Eseje/tree/master/arepo) and [here](https://github.com/pbiecek/archivist/issues/144#issuecomment-169793283).
+
+The `archivist` package also provides `Repository` summary with `summaryGithubRepo` function. This is rather old but still relevant.
+
+```{r}
+summaryRemoteRepo()
+```
+
+
+# Repository deletion
+
+One can easily delete existing Local and GitHub `Repository`. For GitHub one can delete only `archivist`-like `Repository` (gallery folder and `backpack.db` file) by default or the whole GitHub-repository with `deleteRoot = TRUE`. (Yes, I have used those many times while writing this Use Case :)).
+
+```{r, eval=FALSE}
+# eval = FALSE
+deleteLocalRepo(repoDir = 'Gallery', deleteRoot = TRUE)
+deleteGitHubRepo('Gallery', deleteRoot = TRUE)
+```
+
+
+# Feedback and Notes
+
+By now archivist extract extra `Tags` only for such object's classes
+
+```{r, results='asis'}
+# http://stackoverflow.com/a/11005886/3857701
+methodsTable <- ls(.__S3MethodsTable__.,
+                   envir = asNamespace("archivist"),
+                   all.names = TRUE)
+grep('extractTags', methodsTable, value = TRUE) %>%
+	data.frame(extracTags_methods =.) %>%
+	pander::pandoc.table()
+```
+
+If you would like to create wrappers for [other classes](https://github.com/pbiecek/archivist/issues/162) please [open an issue](https://github.com/pbiecek/archivist/issues) or [![Gitter](https://badges.gitter.im/pbiecek/archivist.svg)](https://gitter.im/pbiecek/archivist?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) even for other suggestions,  comments or user requests like [integration with bitbucket](https://github.com/pbiecek/archivist/issues/178), [support for other languages](https://github.com/pbiecek/archivist/issues/179), [support for json/csv files](https://github.com/pbiecek/archivist/issues/181), [summary plots of the `Repository`](https://github.com/pbiecek/archivist/issues/147).
+
+## Session Info
+
+```{r}
+devtools::session_info()
+```
+
