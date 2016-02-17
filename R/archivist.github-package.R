@@ -4,8 +4,9 @@
 #' @title Tools for Archiving, Managing and Sharing R Objects via GitHub
 #'
 #' @description
-#' GitHub integration extension of the \pkg{archivist} package - tool for dtoring, 
-#' restoring and searching for R objects.
+#' GitHub integration extension of the \pkg{archivist} package - tool for storing, 
+#' restoring and searching for R objects. More about \pkg{archivis.github} can be found on 
+#' \href{http://marcinkosinski.github.io/archivist.github/}{marcinkosinski.github.io/archivist.github/}
 #'
 #' @details
 #' For more detailed information visit \pkg{archivist} \code{wiki} on 
@@ -19,7 +20,6 @@
 #' @importFrom httr config
 #' @importFrom httr POST
 #' @importFrom jsonlite unbox
-#' @importFrom RCurl url.exists
 #' @importFrom digest digest
 #' @import archivist
 #' @importMethodsFrom git2r add

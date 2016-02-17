@@ -20,13 +20,12 @@ Imports:
     httr,
     git2r,
     jsonlite,
-    RCurl,
     digest
 Suggests:
-    testthat,
-    knitr
+    R.rsp
+VignetteBuilder: R.rsp
 BugReports: https://github.com/MarcinKosinski/archivist.github/issues
+URL: http://marcinkosinski.github.io/archivist.github/
 RoxygenNote: 5.0.1
-VignetteBuilder: knitr
 NeedsCompilation: no
 

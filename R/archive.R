@@ -5,9 +5,12 @@
 #'
 #' @description
 #' \code{archive} stores artifacts in the local \link{Repository} and automatically pushes archived
-#' artifacts to the Github \code{Repository} with which the local \code{Repository} is synchronized
+#' artifacts to the GitHub \code{Repository} with which the local \code{Repository} is synchronized
 #' (via \link{createGitHubRepo} or \link{cloneGitHubRepo}). Function stores artifacts on the same
 #' way as \link{saveToLocalRepo} function. 
+#' 
+#' More about \pkg{archivis.github} can be found on 
+#' \href{http://marcinkosinski.github.io/archivist.github/}{marcinkosinski.github.io/archivist.github/}
 #' 
 #' @details
 #' To learn more about  \code{Archivist Integration With GitHub} visit \link{agithub}.
@@ -24,7 +27,7 @@
 #' @param ... Further arguments passed to \link{saveToLocalRepo} function.
 #' 
 #' @param alink Logical. Whether the result should be put into \link{alink} function. If you would like to pass further arguments to \code{alink} then
-#' you should specify them with \link{aptions} in this case.
+#' you should specify them with \link{aoptions} in this case.
 #' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}

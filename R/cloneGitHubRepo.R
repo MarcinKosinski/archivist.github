@@ -76,7 +76,6 @@
 #' @export
 cloneGitHubRepo <- function(repoURL, repoDir = NULL, default = FALSE, ...){
 	
-	stopifnot(url.exists(repoURL))
 	stopifnot((is.character(repoDir) & length(repoDir) == 1) | is.null(repoDir))
 	stopifnot( is.logical( default ), length( default ) == 1 )
 	

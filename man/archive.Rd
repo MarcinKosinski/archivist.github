@@ -23,18 +23,21 @@ See \link{agithub}.}
 \item{password}{A character denoting GitHub user password. Can be set globally with \code{aoptions("password", password)}.
 See \link{agithub}.}
 
-\item{alink}{Logical. Whether the result should be put into \link{alink} function. Pass further arguments with \code{...}
-parameter.}
+\item{alink}{Logical. Whether the result should be put into \link{alink} function. If you would like to pass further arguments to \code{alink} then
+you should specify them with \link{aoptions} in this case.}
 
 \item{artifactName}{The name of the artifact with which it should be archived. If \code{NULL} then object's MD5 hash will be used instead.}
 
-\item{...}{Further arguments passed to \link{alink} and \link{saveToRepo} functions.}
+\item{...}{Further arguments passed to \link{saveToLocalRepo} function.}
 }
 \description{
 \code{archive} stores artifacts in the local \link{Repository} and automatically pushes archived
-artifacts to the Github \code{Repository} with which the local \code{Repository} is synchronized
+artifacts to the GitHub \code{Repository} with which the local \code{Repository} is synchronized
 (via \link{createGitHubRepo} or \link{cloneGitHubRepo}). Function stores artifacts on the same
-way as \link{saveToLocalRepo} function.
+way as \link{saveToLocalRepo} function. 
+
+More about \pkg{archivis.github} can be found on 
+\href{http://marcinkosinski.github.io/archivist.github/}{marcinkosinski.github.io/archivist.github/}
 }
 \details{
 To learn more about  \code{Archivist Integration With GitHub} visit \link{agithub}.

@@ -2,10 +2,8 @@ language: r
 r_packages:
   - git2r
   - archivist
-  - testthat
-  - knitr
   - jsonlite
-  - RCurl
+  - R.ssp
   - httr
   - digest
 sudo: required

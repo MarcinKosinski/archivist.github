@@ -22,6 +22,9 @@ with \link{createGitHubRepo} function.
 stored on a GitHub-Repository.
 
 \link{pushGitHubRepo} and \link{pullGitHubRepo} synchronize Local and GitHub (remote) Repository.
+
+More about \pkg{archivis.github} can be found on 
+\href{http://marcinkosinski.github.io/archivist.github/}{marcinkosinski.github.io/archivist.github/}
 }
 \details{
 To use this set of functionalities, one firstly has to authorize himselft to the GitHub API.
