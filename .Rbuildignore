@@ -2,3 +2,4 @@
 ^\.Rproj\.user$
 # Travis scripts
 .travis.yml
+scripts/
