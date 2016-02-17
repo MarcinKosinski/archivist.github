@@ -78,7 +78,7 @@
 #' createGitHubRepo("Museum-Extras", response = TRUE)
 #' createGitHubRepo("Gallery", readmeDescription = NULL)
 #' createGitHubRepo("Landfill", 
-#'         repoDescription = "My models and stuff") 
+#' repoDescription = "My models and stuff") 
 #' createGitHubRepo("MuseumYYYY", repoDir = "Museum_YY")
 #'         
 #'         

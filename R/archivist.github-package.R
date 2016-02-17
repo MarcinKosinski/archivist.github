@@ -21,6 +21,7 @@
 #' @importFrom httr POST
 #' @importFrom jsonlite unbox
 #' @importFrom digest digest
+#' @importFrom utils tail
 #' @import archivist
 #' @importMethodsFrom git2r add
 #' @importMethodsFrom git2r commit

@@ -73,7 +73,8 @@
 #' createGitHubRepo("Museum")
 #' createGitHubRepo("Museum-Extras", response = TRUE)
 #' createGitHubRepo("Gallery", readme = NULL)
-#' createGitHubRepo("Landfill", repoDescription = "My models and stuff")                                                                
+#' createGitHubRepo("Landfill", 
+#' repoDescription = "My models and stuff")
 #'
 #' }
 #' @family archivist

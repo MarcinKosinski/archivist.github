@@ -1,5 +1,5 @@
 Package: archivist.github
-Version: 0.0.5
+Version: 0.1
 Type: Package
 Title: Tools for Archiving, Managing and Sharing R Objects via GitHub
 Authors@R: c(
@@ -8,7 +8,7 @@ Authors@R: c(
     person("Marcin", "Kosinski", role = c("aut", "cre"),
     email = "m.p.kosinski@gmail.com")
     )
-Description: The extension of the archivist package integrating the archivist with GitHub via GitHub API and git2r and httr packages. 
+Description: The extension of the 'archivist' package integrating the archivist with GitHub via GitHub API, 'git2r' packages and 'httr' package. 
 Repository: CRAN
 License: GPL-2
 LazyLoad: yes
