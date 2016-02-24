@@ -7,7 +7,7 @@
 archive(artifact, commitMessage = aoptions("commitMessage"),
   repo = aoptions("repo"), user = aoptions("user"),
   password = aoptions("password"), alink = aoptions("alink"),
-  artifactName = digest(substitute(artifacts)), ...)
+  artifactName = deparse(substitute(artifact)), ...)
 }
 \arguments{
 \item{artifact}{An artifact to be archived on Local and Github \link{Repository}.}

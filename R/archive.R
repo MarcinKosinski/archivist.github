@@ -91,7 +91,7 @@ archive <- function(artifact,
 										user = aoptions("user"),
 										password = aoptions("password"),
 										alink = aoptions("alink"),
-										artifactName = digest(substitute(artifacts)),
+										artifactName = deparse(substitute(artifact)),
 										...){
 	stopifnot(is.character(c(repo, user, password)))
 	stopifnot(is.null(commitMessage) | (length(commitMessage) == 1 & is.character(commitMessage)))
@@ -99,7 +99,7 @@ archive <- function(artifact,
 	stopifnot(is.logical(alink) & length(alink) == 1)
 		
 	# archive Locally
-	assign(x = artifactName, value = artifact)
+	# assign(x = artifactName, value = artifact)
 	archivist::saveToRepo(artifact = artifact, artifactName = artifactName, ...) -> md5hash
 	
 	# commit
