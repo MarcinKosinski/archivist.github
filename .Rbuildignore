@@ -4,4 +4,5 @@
 .travis.yml
 scripts
 Gallery
+eRum2016
 ^.*\.rda$
