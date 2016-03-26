@@ -79,9 +79,10 @@ cloneGitHubRepo <- function(repoURL, repoDir = NULL, default = FALSE, ...){
 	stopifnot((is.character(repoDir) & length(repoDir) == 1) | is.null(repoDir))
 	stopifnot( is.logical( default ), length( default ) == 1 )
 	
+	repoURLsplitted <- strsplit(repoURL, "/")[[1]] 
+	
 	if (is.null(repoDir)) {
-		repoDir <-tail(strsplit(repoURL,
-														"/")[[1]],1)
+		repoDir <-tail(repoURLsplitted,1)
 	}
 	
 	if (!file.exists(repoDir)) {
@@ -92,10 +93,8 @@ cloneGitHubRepo <- function(repoURL, repoDir = NULL, default = FALSE, ...){
 	
 	if (default) {
 		archivist::aoptions('repoDir', repoDir)
-		archivist::aoptions('user', tail(strsplit(repoURL,
-																			 "/")[[1]],2)[1])
-		archivist::aoptions('repo',tail(strsplit(repoURL,
-																			 "/")[[1]],1))
+		archivist::aoptions('user', tail(repoURLsplitted,2)[1])
+		archivist::aoptions('repo', tail(repoURLsplitted,1))
 	}
 	return(repo2return)
 }
