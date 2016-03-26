@@ -160,7 +160,7 @@ createGitHubRepo <- function(repo,
 	
 	# httr imports are in archivist-package.R file
 	# creating an empty GitHub Repository
-	if(verbose) cat("\n - creating an empty GitHub Repository\n")
+	if(verbose) cat(" - creating an empty GitHub Repository\n")
 	httr::POST(url = "https://api.github.com/user/repos",
 			 encode = "json",
 			 body = list(
@@ -173,7 +173,7 @@ createGitHubRepo <- function(repo,
 	
 	# git2r imports are in the archivist-package.R
 	#path <- repoDir
-	if(verbose) cat("\n - git2r imports are in the archivist-package.R\n")
+	if(verbose) cat(" - git2r imports are in the archivist-package.R\n")
 	dir.create(repoDir)
 	
 	if (!shortPath){
@@ -185,7 +185,7 @@ createGitHubRepo <- function(repo,
 	
 	# initialize local git repository
 	# git init
-	if(verbose) cat("\n - initialize local git repository\n")
+	if(verbose) cat(" - initialize local git repository\n")
 	repoDir_git2r <- git2r::init(repoDir_path)
 	
 	## Create and configure a user
@@ -193,11 +193,11 @@ createGitHubRepo <- function(repo,
 	#git2r::config(repo, ...) # if about to use, the add to archivist-package.R
 	
 	# archivist-like Repository creation
-	if(verbose) cat("\n - archivist-like Repository creation\n")
+	if(verbose) cat(" - archivist-like Repository creation\n")
 	archivist::createLocalRepo(repoDir = repoDir_path, ...)
 	file.create(file.path(repoDir_path, "gallery", ".gitkeep"))
 	# git add
-	if(verbose) cat("\n - git add\n")
+	if(verbose) cat(" - git add\n")
 	if (!is.null(readmeDescription)){
 		file.create(file.path(repoDir_path, "README.md"))
 		writeLines(aoptions("readmeDescription"), file.path(repoDir_path, "README.md"))
@@ -207,12 +207,12 @@ createGitHubRepo <- function(repo,
 	}
 	
 	# git commit
-	if(verbose) cat("\n - git commit\n")
+	if(verbose) cat(" - git commit\n")
 	new_commit <- git2r::commit(repoDir_git2r, "archivist Repository creation.")
 	
 	# association of the local and GitHub git repository
 	# git add remote
-	if(verbose) cat("\n - git add remote\n")
+	if(verbose) cat(" - git add remote\n")
 	git2r::remote_add(repoDir_git2r,
 						 #"upstream2",
 						 'origin',
@@ -220,12 +220,12 @@ createGitHubRepo <- function(repo,
 	
 	# GitHub authorization
 	# to perform pull and push operations
-	if(verbose) cat("\n - to perform pull and push operations\n")
+	if(verbose) cat(" - to perform pull and push operations\n")
 	cred <- git2r::cred_user_pass(user,
 																password)
 	
 	# push archivist-like Repository to GitHub repository
-	if(verbose) cat("\n - push archivist-like Repository to GitHub repository\n")
+	if(verbose) cat(" - push archivist-like Repository to GitHub repository\n")
 	git2r::push(repoDir_git2r,
 			 #name = "upstream2",
 			 refspec = "refs/heads/master",
