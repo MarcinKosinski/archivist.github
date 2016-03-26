@@ -7,7 +7,7 @@
 archive(artifact, commitMessage = aoptions("commitMessage"),
   repo = aoptions("repo"), user = aoptions("user"),
   password = aoptions("password"), alink = aoptions("alink"),
-  artifactName = deparse(substitute(artifact)), ...)
+  artifactName = deparse(substitute(artifact)), verbose = FALSE, ...)
 }
 \arguments{
 \item{artifact}{An artifact to be archived on Local and Github \link{Repository}.}
@@ -27,6 +27,8 @@ See \link{agithub}.}
 you should specify them with \link{aoptions} in this case.}
 
 \item{artifactName}{The name of the artifact with which it should be archived. If \code{NULL} then object's MD5 hash will be used instead.}
+
+\item{verbose}{A logical value. If TRUE then additional messages will be printed out.}
 
 \item{...}{Further arguments passed to \link{saveToLocalRepo} function.}
 }

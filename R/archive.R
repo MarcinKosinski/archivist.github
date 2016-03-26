@@ -28,6 +28,7 @@
 #' 
 #' @param alink Logical. Whether the result should be put into \link{alink} function. If you would like to pass further arguments to \code{alink} then
 #' you should specify them with \link{aoptions} in this case.
+#' @param verbose A logical value. If TRUE then additional messages will be printed out.
 #' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
@@ -92,6 +93,7 @@ archive <- function(artifact,
 										password = aoptions("password"),
 										alink = aoptions("alink"),
 										artifactName = deparse(substitute(artifact)),
+										verbose = FALSE,
 										...){
 	stopifnot(is.character(c(repo, user, password)))
 	stopifnot(is.null(commitMessage) | (length(commitMessage) == 1 & is.character(commitMessage)))
@@ -100,11 +102,13 @@ archive <- function(artifact,
 		
 	# archive Locally
 	# assign(x = artifactName, value = artifact)
+	if(verbose) cat(" - archive Locally\n")
 	archivist::saveToRepo(artifact = artifact, artifactName = artifactName, ...) -> md5hash
 	
 	# commit
 	# new rows in backpack.db
 	# and new files for artifact
+	if(verbose) cat(" - and new files for artifact\n")
 	repoName <- repo
 	repo <- git2r::repository(repo)
 	
@@ -114,22 +118,25 @@ archive <- function(artifact,
 										 		 							list.files(file.path(repoName, "gallery"))),
 										 		 value = TRUE)))
 	
+	if(verbose) cat(" - commit\n")
 	if (is.null(commitMessage)){
-		new_commit <- git2r::commit(repo, paste0("archivist: add ", md5hash))
-	} else {
-		new_commit <- git2r::commit(repo, commitMessage)
-	}
-	
+		commitMessage <- paste0("archivist: add ", md5hash)
+	} 
+	new_commit <- git2r::commit(repo, commitMessage)
+
 	# authentication with GitHub
 	cred <- cred_user_pass(user, password)
 	
 	# push to github
+	if(verbose) cat(" - push to github\n")
 	git2r::push(repo, refspec = "refs/heads/master", credentials = cred)
 	
+	
+	urh <- paste0(user,"/",repoName,"/",md5hash)
   if (alink) {
-		alink(paste0(user,"/",repoName,"/",md5hash))
+		alink(urh)
 	} else {
-		return(paste0(user,"/",repoName,"/",md5hash))
+		urh
 	}
 	
 }
