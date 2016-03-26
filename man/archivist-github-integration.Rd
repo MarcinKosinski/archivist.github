@@ -29,7 +29,9 @@ More about \pkg{archivis.github} can be found on
 \details{
 To use this set of functionalities, one firstly has to authorize himselft to the GitHub API.
 It can be done by creating \href{OAuth application on GitHub}{https://github.com/settings/developers}
-(register new application). When application is created, one will have to copy its \code{Client ID} and
+(register new application). If you do not know what should be included as \code{callback url}, you may 
+use \code{http://localhost:1410} for testing purposes.
+When application is created, one will have to copy its \code{Client ID} and
 \code{Client Secret} and authorize his github user with this application by running those commands:
  \itemize{
    \item \code{myapp <- oauth_app("github", key = Client_ID, secret = Client_Secret)},

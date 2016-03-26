@@ -97,7 +97,8 @@ showRemoteRepo()
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 }
 \seealso{
-Other archivist.github: \code{\link{cloneGitHubRepo}},
+Other archivist.github: \code{\link{authoriseGitHub}},
+  \code{\link{cloneGitHubRepo}},
   \code{\link{createGitHubRepo}},
   \code{\link{deleteGitHubRepo}}
 }

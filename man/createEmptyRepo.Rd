@@ -9,7 +9,7 @@ createGitHubRepo(repo, github_token = aoptions("github_token"),
   password = aoptions("password"),
   repoDescription = aoptions("repoDescription"),
   readmeDescription = aoptions("readmeDescription"),
-  response = aoptions("response"), default = FALSE, ...)
+  response = aoptions("response"), default = FALSE, verbose = FALSE, ...)
 }
 \arguments{
 \item{repo}{While working with a Github repository. A character denoting new GitHub repository name. White spaces will be substitued with a dash.}
@@ -35,6 +35,8 @@ Can be set globally with \code{aoptions("readmeDescription", readmeDescription)}
 \item{response}{A logical value. Should the GitHub API response be returned.}
 
 \item{default}{If \code{default = TRUE} then \code{repoDir} (\code{repo}) is set as default local repository. Also the \code{user} is set as default GitHub user.}
+
+\item{verbose}{A logical value. If TRUE then additional messages will be printed out.}
 
 \item{...}{further arguments passed to \link{createLocalRepo} such as \code{force}.}
 }
@@ -136,6 +138,7 @@ Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 }
 \seealso{
 Other archivist.github: \code{\link{archive}},
+  \code{\link{authoriseGitHub}},
   \code{\link{cloneGitHubRepo}},
   \code{\link{deleteGitHubRepo}}
 }

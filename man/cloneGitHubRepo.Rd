@@ -81,6 +81,7 @@ Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 }
 \seealso{
 Other archivist.github: \code{\link{archive}},
+  \code{\link{authoriseGitHub}},
   \code{\link{createGitHubRepo}},
   \code{\link{deleteGitHubRepo}}
 }
