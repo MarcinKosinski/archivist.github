@@ -74,11 +74,10 @@ pushGitHubRepo <- function(repoDir = aoptions('repoDir'),
 	git2r::add(repo, files)
 	
 	if (is.null(commitMessage)){
-		new_commit <- git2r::commit(repo, "archivist: pushGitHubRepo")
-	} else {
-		new_commit <- git2r::commit(repo, commitMessage)
-	}
-	
+		commitMessage <- "archivist: pushGitHubRepo"
+	} 
+	new_commit <- git2r::commit(repo, commitMessage)
+
 	# authentication with GitHub
 	cred <- git2r::cred_user_pass(user,
 												 password)
