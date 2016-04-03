@@ -173,7 +173,7 @@ createGitHubRepo <- function(repo,
 	
 	# git2r imports are in the archivist-package.R
 	#path <- repoDir
-	if(verbose) cat(" - git2r imports are in the archivist-package.R\n")
+	if(verbose) cat(" - create directory for the repo\n")
 	dir.create(repoDir)
 	
 	if (!shortPath){
