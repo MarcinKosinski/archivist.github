@@ -6,6 +6,8 @@
 [![Linux Build Status](https://api.travis-ci.org/pbiecek/archivist.png)](https://travis-ci.org/MarcinKosinski/archivist.github)[![Pending Pull-Requests](http://githubbadges.herokuapp.com/MarcinKosinski/archivist.github/pulls.svg?style=flat)](https://github.com/MarcinKosinski/archivist.github/pulls)
 [![Github Issues](http://githubbadges.herokuapp.com/MarcinKosinski/archivist.github/issues.svg)](https://github.com/MarcinKosinski/archivist.github/issues)
 
+[![Gitter](https://badges.gitter.im/MarcinKosinski/archivist.github.svg)](https://gitter.im/MarcinKosinski/archivist.github?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)[![Documentation](https://img.shields.io/badge/staticdocs-archivist.github-blue.svg)](http://marcinkosinski.github.io/archivist.github/)
+
 
 Tools for Archiving, Managing and Sharing R Objects via GitHub
 =====================================================
