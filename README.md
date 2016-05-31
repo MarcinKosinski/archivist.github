@@ -8,6 +8,8 @@
 Tools for Archiving, Managing and Sharing R Objects via GitHub
 =====================================================
 
+[![Join the chat at https://gitter.im/MarcinKosinski/archivist.github](https://badges.gitter.im/MarcinKosinski/archivist.github.svg)](https://gitter.im/MarcinKosinski/archivist.github?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 
 ![Workflow of archivist.github package](https://raw.githubusercontent.com/MarcinKosinski/archivist.github/master/scripts/archivist.github_workflow_ver2.png)
 
