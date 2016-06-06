@@ -21,7 +21,8 @@ Marcin Kosinski [aut, cre] \email{m.p.kosinski@gmail.com} \cr
 Przemyslaw Biecek [aut] \email{przemyslaw.biecek@gmail.com}
 }
 \seealso{
-Other archivist: \code{\link{archivist-github-integration}},
+Other archivist: \code{\link{addHooksToPrintGitHub}},
+  \code{\link{archivist-github-integration}},
   \code{\link{pushGitHubRepo}}
 }
 

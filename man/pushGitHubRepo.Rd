@@ -72,7 +72,8 @@ git2r::status(repository('Museum'))
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 }
 \seealso{
-Other archivist: \code{\link{archivist-github-integration}},
+Other archivist: \code{\link{addHooksToPrintGitHub}},
+  \code{\link{archivist-github-integration}},
   \code{\link{archivist-package}}
 }
 

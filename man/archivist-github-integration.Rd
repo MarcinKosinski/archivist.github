@@ -83,7 +83,8 @@ repoDescription = "My models and stuff")
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 }
 \seealso{
-Other archivist: \code{\link{archivist-package}},
+Other archivist: \code{\link{addHooksToPrintGitHub}},
+  \code{\link{archivist-package}},
   \code{\link{pushGitHubRepo}}
 }
 
