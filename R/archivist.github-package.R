@@ -16,9 +16,16 @@
 #' Marcin Kosinski [aut, cre] \email{m.p.kosinski@@gmail.com} \cr
 #' Przemyslaw Biecek [aut] \email{przemyslaw.biecek@@gmail.com} 
 #' 
+#' @note 
+#' Bug reports and feature requests can be sent to \href{https://github.com/MarcinKosinski/archivist.github/issues}{https://github.com/MarcinKosinski/archivist.github/issues}
+#' 
+#' 
 #' @importFrom httr DELETE
 #' @importFrom httr config
 #' @importFrom httr POST
+#' @importFrom httr oauth_app
+#' @importFrom httr oauth2.0_token
+#' @importFrom httr oauth_endpoints
 #' @importFrom jsonlite unbox
 #' @importFrom digest digest
 #' @importFrom utils tail
