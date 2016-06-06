@@ -42,6 +42,9 @@ To learn more about  \code{Archivist Integration With GitHub} visit \link{agithu
 To delete GitHub Repository you
 need to have \code{delete_repo} scope set - see examples.
 }
+\note{
+Bug reports and feature requests can be sent to \href{https://github.com/MarcinKosinski/archivist.github/issues}{https://github.com/MarcinKosinski/archivist.github/issues}
+}
 \examples{
 \dontrun{
 

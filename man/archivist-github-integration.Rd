@@ -53,6 +53,8 @@ and \code{aoptions("user.password", user.password)}.
 Note that global configuration of the \code{git config} is used for initial commit.
 One can later specify local configuration for the repository with \link[git2r]{config}, e.g
 \code{config(repoName, user.name = "Alice", user.email = "mail_at_gmail.com")}.
+
+Bug reports and feature requests can be sent to \href{https://github.com/MarcinKosinski/archivist.github/issues}{https://github.com/MarcinKosinski/archivist.github/issues}
 }
 \examples{
 \dontrun{

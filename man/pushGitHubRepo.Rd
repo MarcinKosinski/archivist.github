@@ -41,6 +41,8 @@ To learn more about  \code{Archivist Integration With GitHub} visit \link{agithu
 }
 \note{
 To check the \code{status} (\code{git status}) of the Repository use \code{git2r::status(repository(repoDir))}. See examples.
+
+Bug reports and feature requests can be sent to \href{https://github.com/MarcinKosinski/archivist.github/issues}{https://github.com/MarcinKosinski/archivist.github/issues}
 }
 \examples{
 \dontrun{

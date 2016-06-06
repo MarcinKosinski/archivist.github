@@ -44,6 +44,9 @@ More about \pkg{archivis.github} can be found on
 \details{
 To learn more about  \code{Archivist Integration With GitHub} visit \link{agithub}.
 }
+\note{
+Bug reports and feature requests can be sent to \href{https://github.com/MarcinKosinski/archivist.github/issues}{https://github.com/MarcinKosinski/archivist.github/issues}
+}
 \examples{
 \dontrun{
 

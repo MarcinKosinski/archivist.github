@@ -70,6 +70,9 @@ artifacts will be archived.
 After every \code{saveToLocalRepo} call the database is refreshed. As a result, the artifact is available 
 immediately in \code{backpack.db} database for other collaborators.
 }
+\note{
+Bug reports and feature requests can be sent to \href{https://github.com/MarcinKosinski/archivist.github/issues}{https://github.com/MarcinKosinski/archivist.github/issues}
+}
 \examples{
 \dontrun{
 ## GitHub version

@@ -17,6 +17,9 @@ and stores resulting token in the \code{github_token} variable.
 In order to authorise your app you need ClinetID and ClientSecret.
 They can be found here: https://github.com/settings/applications/new
 }
+\note{
+Bug reports and feature requests can be sent to \href{https://github.com/MarcinKosinski/archivist.github/issues}{https://github.com/MarcinKosinski/archivist.github/issues}
+}
 \examples{
 \dontrun{
 ## GitHub version
