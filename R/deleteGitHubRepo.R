@@ -9,6 +9,8 @@
 #' 
 #' @details
 #' To learn more about  \code{Archivist Integration With GitHub} visit \link{agithub}.
+#' To delete GitHub Repository you
+#' need to have \code{delete_repo} scope set - see examples.
 #'  
 #' @param deleteRoot A logical value that specifies if the repository root directory
 #' should be deleted for Local Repository or for GitHub whether to delete whole GitHub-Repository.
@@ -26,11 +28,11 @@
 #' @param password Only when \code{deleteRoot = FALSE}. While working with a Github repository. A character denoting GitHub user password. Can be set globally with \code{aoptions("password", password)}.
 #' See \link{archivist-github-integration}.
 #' 
-#' @details
 #' 
-#' To delete GitHub Repository you
-#' need to have \code{delete_repo} scope set - see examples.
-#' 
+#' @references 
+#' More about \pkg{archivis.github} can be found on 
+#' \href{http://marcinkosinski.github.io/archivist.github/}{marcinkosinski.github.io/archivist.github/} 
+#' and about \pkg{archivist} in posts' history on \href{http://pbiecek.github.io/archivist/Posts.html}{http://pbiecek.github.io/archivist/Posts.html}
 #' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}

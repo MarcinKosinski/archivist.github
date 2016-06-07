@@ -29,6 +29,11 @@ authoriseGitHub(ClientID, ClientSecret) -> github_token
 \author{
 Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
 }
+\references{
+More about \pkg{archivis.github} can be found on 
+\href{http://marcinkosinski.github.io/archivist.github/}{marcinkosinski.github.io/archivist.github/} 
+and about \pkg{archivist} in posts' history on \href{http://pbiecek.github.io/archivist/Posts.html}{http://pbiecek.github.io/archivist/Posts.html}
+}
 \seealso{
 Other archivist.github: \code{\link{archive}},
   \code{\link{archivist.github-package}},

@@ -39,10 +39,9 @@ is \code{repoDir}. By default all uncommited artifacts and \code{backpack.db} wi
 }
 \details{
 To learn more about  \code{Archivist Integration With GitHub} visit \link{agithub}.
+To check the \code{status} (\code{git status}) of the Repository use \code{git2r::status(repository(repoDir))}. See examples.
 }
 \note{
-To check the \code{status} (\code{git status}) of the Repository use \code{git2r::status(repository(repoDir))}. See examples.
-
 Bug reports and feature requests can be sent to \href{https://github.com/MarcinKosinski/archivist.github/issues}{https://github.com/MarcinKosinski/archivist.github/issues}
 }
 \examples{
@@ -64,6 +63,11 @@ git2r::status(repository('Museum'))
 }
 \author{
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}
+}
+\references{
+More about \pkg{archivis.github} can be found on 
+\href{http://marcinkosinski.github.io/archivist.github/}{marcinkosinski.github.io/archivist.github/} 
+and about \pkg{archivist} in posts' history on \href{http://pbiecek.github.io/archivist/Posts.html}{http://pbiecek.github.io/archivist/Posts.html}
 }
 \seealso{
 Other archivist.github: \code{\link{archive}},

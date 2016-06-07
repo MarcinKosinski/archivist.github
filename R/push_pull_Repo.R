@@ -10,6 +10,7 @@
 #' 
 #' @details
 #' To learn more about  \code{Archivist Integration With GitHub} visit \link{agithub}.
+#' To check the \code{status} (\code{git status}) of the Repository use \code{git2r::status(repository(repoDir))}. See examples.
 #'  
 #' @param repoDir A character specifing the directory to Local \code{Repository} to/from which artifacts will be pulled/pushed to GitHub.
 #' @param commitMessage A character denoting a message added to the commit while performing push.
@@ -24,13 +25,17 @@
 #' @param ... Further arguments passed to \link[git2r]{push} or \link[git2r]{pull}.
 #' 
 #' 
-#' @note To check the \code{status} (\code{git status}) of the Repository use \code{git2r::status(repository(repoDir))}. See examples.
 #' 
 #' @author 
 #' Marcin Kosinski, \email{m.p.kosinski@@gmail.com}
 #' 
 #' @note 
 #' Bug reports and feature requests can be sent to \href{https://github.com/MarcinKosinski/archivist.github/issues}{https://github.com/MarcinKosinski/archivist.github/issues}
+#' 
+#' @references 
+#' More about \pkg{archivis.github} can be found on 
+#' \href{http://marcinkosinski.github.io/archivist.github/}{marcinkosinski.github.io/archivist.github/} 
+#' and about \pkg{archivist} in posts' history on \href{http://pbiecek.github.io/archivist/Posts.html}{http://pbiecek.github.io/archivist/Posts.html} 
 #' 
 #' 
 #' @examples 

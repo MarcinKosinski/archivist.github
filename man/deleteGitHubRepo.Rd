@@ -38,7 +38,6 @@ stored on a GitHub-Repository (then it requires more parameters to be specified)
 }
 \details{
 To learn more about  \code{Archivist Integration With GitHub} visit \link{agithub}.
-
 To delete GitHub Repository you
 need to have \code{delete_repo} scope set - see examples.
 }
@@ -61,6 +60,11 @@ deleteGitHubRepo(repo = "Museum", deleteRoot = TRUE, response = TRUE)
 }
 \author{
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}
+}
+\references{
+More about \pkg{archivis.github} can be found on 
+\href{http://marcinkosinski.github.io/archivist.github/}{marcinkosinski.github.io/archivist.github/} 
+and about \pkg{archivist} in posts' history on \href{http://pbiecek.github.io/archivist/Posts.html}{http://pbiecek.github.io/archivist/Posts.html}
 }
 \seealso{
 Other archivist.github: \code{\link{archive}},

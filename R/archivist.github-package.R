@@ -9,9 +9,9 @@
 #' \href{http://marcinkosinski.github.io/archivist.github/}{marcinkosinski.github.io/archivist.github/}
 #'
 #' @details
-#' For more detailed information visit \pkg{archivist} \code{wiki} on 
-#' \href{https://github.com/pbiecek/archivist/wiki}{GitHub} or \href{http://pbiecek.github.io/archivist/Posts.html}{http://pbiecek.github.io/archivist/Posts.html}.
-#'
+#' More about \pkg{archivis.github} can be found on 
+#' \href{http://marcinkosinski.github.io/archivist.github/}{marcinkosinski.github.io/archivist.github/} 
+#' and about \pkg{archivist} in posts' history on \href{http://pbiecek.github.io/archivist/Posts.html}{http://pbiecek.github.io/archivist/Posts.html}#'
 #' @author
 #' Marcin Kosinski [aut, cre] \email{m.p.kosinski@@gmail.com} \cr
 #' Przemyslaw Biecek [aut] \email{przemyslaw.biecek@@gmail.com} 

@@ -9,6 +9,9 @@
 Set of functions to integrate \link[archivist]{archivist-package} with
 GitHub API \href{https://developer.github.com/v3/}{https://developer.github.com/v3/}.
 
+To start working with \pkg{archivist.github} one should run \link{authoriseGitHub} to create an
+\code{OAuth} token which is required by every function in this package.
+
 It is possible to create new GitHub repository with an empty \pkg{archivist}-like \link{Repository}
 with \link{createGitHubRepo} function. 
 
@@ -22,9 +25,6 @@ with \link{createGitHubRepo} function.
 stored on a GitHub-Repository.
 
 \link{pushGitHubRepo} and \link{pullGitHubRepo} synchronize Local and GitHub (remote) Repository.
-
-More about \pkg{archivis.github} can be found on 
-\href{http://marcinkosinski.github.io/archivist.github/}{marcinkosinski.github.io/archivist.github/}
 }
 \details{
 To use this set of functionalities, one firstly has to authorize himselft to the GitHub API.
@@ -74,6 +74,11 @@ repoDescription = "My models and stuff")
 }
 \author{
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}
+}
+\references{
+More about \pkg{archivis.github} can be found on 
+\href{http://marcinkosinski.github.io/archivist.github/}{marcinkosinski.github.io/archivist.github/} 
+and about \pkg{archivist} in posts' history on \href{http://pbiecek.github.io/archivist/Posts.html}{http://pbiecek.github.io/archivist/Posts.html}
 }
 \seealso{
 Other archivist: \code{\link{addHooksToPrintGitHub}}
