@@ -60,7 +60,7 @@ Bug reports and feature requests can be sent to \href{https://github.com/MarcinK
 \dontrun{
 authoriseGitHub(ClientID, ClientSecret) -> github_token
 # authoriseGitHub also does: aoptions("github_token", github_token)
-aoptions("name", user.name)
+aoptions("user", user.name)
 aoptions("password", user.password)
 
 ## here github_token is used

@@ -45,7 +45,7 @@
 #' # empty GitHub Repository creation
 #' authoriseGitHub(ClientID, ClientSecret) -> github_token
 #' # authoriseGitHub also does: aoptions("github_token", github_token)
-#' aoptions("name", user.name)
+#' aoptions("user", user.name)
 #' aoptions("password", user.password)
 #' 
 #' createGitHubRepo("archive-test4", default = TRUE)
@@ -85,14 +85,14 @@
 #' @rdname archive
 #' @export
 archive <- function(artifact, 
-							commitMessage = aoptions("commitMessage"),
-							repo = aoptions("repo"), 
-							user = aoptions("user"),
-							password = aoptions("password"),
-							alink = aoptions("alink"),
-							artifactName = deparse(substitute(artifact)),
-							verbose = FALSE,
-							...){
+										commitMessage = aoptions("commitMessage"),
+										repo = aoptions("repo"), 
+										user = aoptions("user"),
+										password = aoptions("password"),
+										alink = aoptions("alink"),
+										artifactName = deparse(substitute(artifact)),
+										verbose = FALSE,
+										...){
 	stopifnot(is.character(c(repo, user, password)))
 	stopifnot(is.null(commitMessage) | (length(commitMessage) == 1 & is.character(commitMessage)))
 	stopifnot(length(repo) == 1, length(user) == 1,	length(password) == 1)

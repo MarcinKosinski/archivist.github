@@ -72,7 +72,7 @@
 #' # empty GitHub Repository creation
 #' authoriseGitHub(ClientID, ClientSecret) -> github_token
 #' # authoriseGitHub also does: aoptions("github_token", github_token)
-#' aoptions("name", user.name)
+#' aoptions("user", user.name)
 #' aoptions("password", user.password)
 #' 
 #' createGitHubRepo("Museum")
