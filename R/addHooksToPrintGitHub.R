@@ -1,7 +1,7 @@
 ##  archivist package for R
 ##  archivist.github package for R
 ##
-#' @title Add \pkg{archivist} Hooks to \pkg{rmarkdown} HTML Report
+#' @title Add \pkg{archivist} Hooks to \pkg{rmarkdown} HTML Report and Archive Artifact on GitHub
 #'
 #' @description
 #' \code{addHooksToPrintGitHub} adds an overloaded version of the print function for objects of selected class. 
@@ -9,15 +9,11 @@
 #' This is GitHub version of \code{addHooksToPrint} and it automatically stores artifacts on GitHub - see examples.
 #' 
 #' @param class A character containing a name of class (one or more) that should be archived.
-#' @param repo A character containing a name of a Git repository on which the Repository is archived.
+#' @param repo A character containing a name of a GitHub repository on which the Repository is archived.
 #' If \code{repo = NULL} then hooks will be added to files in local directories.
-#' @param user A character containing a name of a Git user on whose account the \code{repo} is created.
-#' @param branch A character containing a name of Git Repository's branch on which the Repository is archived. 
-#' Default \code{branch} is \code{master}.
-#' @param subdir A character containing a name of a directory on Git repository 
-#' on which the Repository is stored. If the Repository is stored in main folder on Git repository, this should be set 
-#' to \code{subdir = "/"} as default.
-#' @param repoDir A character containing a name of Local Repository.
+#' @param user A character containing a name of a GitHub user on whose account the \code{repo} is created.
+#' @param password A character denoting GitHub user password. Can be set globally with \code{aoptions("password", password)}.
+#' See \link{agithub}.
 #' 
 #' @author 
 #' Przemyslaw Biecek (\link{addHooksToPrint}), \email{przemyslaw.biecek@@gmail.com} \cr
@@ -29,24 +25,32 @@
 #' 
 #' Bug reports and feature requests can be sent to \href{https://github.com/pbiecek/archivist/issues}{https://github.com/pbiecek/archivist/issues}
 #'  
+#' @references 
+#' More about \pkg{archivis.github} can be found on 
+#' \href{http://marcinkosinski.github.io/archivist.github/}{marcinkosinski.github.io/archivist.github/} 
+#' and about \pkg{archivist} in posts' history on \href{http://pbiecek.github.io/archivist/Posts.html}{http://pbiecek.github.io/archivist/Posts.html}
+#'  
 #' @examples
 #' 
 #' \dontrun{
-#' # only in Rmd report, links to github repository
-#' addHooksToPrint(class="ggplot", repoDir = "arepo",
-#' repo="graphGallery", user="pbiecek")
-#' # only in Rmd report, links to local files
-#' addHooksToPrint(class="ggplot", repoDir = "arepo",
-#' repo=NULL)
+#' # only in Rmd report, links to GitHub repository and archive artifact
+#' #' # empty GitHub Repository creation
+#' authoriseGitHub(ClientID, ClientSecret) -> github_token
+#' # authoriseGitHub also does: aoptions("github_token", github_token)
+#' aoptions("user", user.name)
+#' aoptions("password", user.password)
+#' createGitHubRepo("Museum", default = TRUE) # it does aoptions("repo", "Museum")
+#' 
+#' addHooksToPrintGitHub(class="ggplot") # takes default parameters from ?aoptions
+#' qplot(mpg, wt, data = mtcars, geom = "path")
 #' }
 #' @family archivist
 #' @rdname addHooksToPrintGitHub
 #' @export
-
 addHooksToPrintGitHub <- function(class = "ggplot",
-                            repoDir = aoptions("repoDir"), 
-                            repo = aoptions("repo"), user = aoptions("user"), branch = "master", subdir = aoptions("subdir")
-){
+                                  repo = aoptions("repo"),
+																	user = aoptions("user"),
+																	password = aoptions("password")){
   stopifnot( is.character( class ), 
              is.character( repoDir ), 
              (is.null(repo) || is.character( repo )), 
