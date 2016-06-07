@@ -241,7 +241,9 @@ myapp &lt;- oauth_app(&quot;github&quot;,
 github_token &lt;- oauth2.0_token(oauth_endpoints(&quot;github&quot;),
                                myapp,
                                scope = c(&quot;public_repo&quot;,
-                                         &quot;delete_repo&quot;))</code></pre>
+                                         &quot;delete_repo&quot;))
+# or use wrapper for 
+authoriseGitHub(ClientID, ClientSecret)</code></pre>
 <p>The above command created a <code>github_token</code> that uses <code>OAuth</code> open autorization system.</p>
 <blockquote>
 <p>OAuth allows notifying a resource provider (e.g. Facebook) that the resource owner (e.g. you) grants permission to a third-party (e.g. a Facebook Application) access to their information (e.g. the list of your friends).</p>
