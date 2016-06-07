@@ -1,4 +1,5 @@
-##    archivist package for R
+##  archivist package for R
+##  archivist.github package for R
 ##
 #' @title Archivist Integration With GitHub
 #' 
@@ -63,15 +64,8 @@
 #' 
 #' @examples
 #' \dontrun{
-#' library(httr)
-#' myapp <- oauth_app("github",
-#'                    key = app_key,
-#'                    secret = app_secret)
-#' github_token <- oauth2.0_token(oauth_endpoints("github"),
-#'                                 myapp,
-#'                                 scope = c("public_repo",
-#'                                           "delete_repo"))
-#' aoptions("github_token", github_token)
+#' authoriseGitHub(ClientID, ClientSecret) -> github_token
+#' # authoriseGitHub also does: aoptions("github_token", github_token)
 #' aoptions("name", user.name)
 #' aoptions("password", user.password)
 #' 

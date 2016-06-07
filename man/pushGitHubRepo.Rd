@@ -2,6 +2,7 @@
 % Please edit documentation in R/push_pull_Repo.R
 \name{pushGitHubRepo}
 \alias{pullGitHubRepo}
+\alias{pullGithubRepo}
 \alias{pushGitHubRepo}
 \title{Push and Pull for Repository}
 \usage{
@@ -47,15 +48,8 @@ Bug reports and feature requests can be sent to \href{https://github.com/MarcinK
 \examples{
 \dontrun{
 
-library(httr)
-myapp <- oauth_app("github",
-                   key = app_key,
-                   secret = app_secret)
-github_token <- oauth2.0_token(oauth_endpoints("github"),
-                                myapp,
-                                scope = c("public_repo",
-                                          "delete_repo"))
-aoptions("github_token", github_token)
+authoriseGitHub(ClientID, ClientSecret) -> github_token
+# authoriseGitHub also does: aoptions("github_token", github_token)
 aoptions("name", user.name)
 aoptions("password", user.password)
 
@@ -72,8 +66,11 @@ git2r::status(repository('Museum'))
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 }
 \seealso{
-Other archivist: \code{\link{addHooksToPrintGitHub}},
-  \code{\link{archivist-github-integration}},
-  \code{\link{archivist-package}}
+Other archivist.github: \code{\link{archive}},
+  \code{\link{archivist.github-package}},
+  \code{\link{authoriseGitHub}},
+  \code{\link{cloneGitHubRepo}},
+  \code{\link{createGitHubRepo}},
+  \code{\link{deleteGitHubRepo}}
 }
 

@@ -1,5 +1,5 @@
-##    archivist package for R
-##		archivist.github package for R
+##  archivist package for R
+##  archivist.github package for R
 ##
 #' @title Tools for Archiving, Managing and Sharing R Objects via GitHub
 #'
@@ -10,7 +10,7 @@
 #'
 #' @details
 #' For more detailed information visit \pkg{archivist} \code{wiki} on 
-#' \href{https://github.com/pbiecek/archivist/wiki}{Github}.
+#' \href{https://github.com/pbiecek/archivist/wiki}{GitHub} or \href{http://pbiecek.github.io/archivist/Posts.html}{http://pbiecek.github.io/archivist/Posts.html}.
 #'
 #' @author
 #' Marcin Kosinski [aut, cre] \email{m.p.kosinski@@gmail.com} \cr
@@ -45,7 +45,7 @@
 #' @importClassesFrom git2r git_repository
 #' 
 #' 
-#' @family archivist
-#' @name archivist-package
+#' @family archivist.github
+#' @name archivist.github-package
 #' @docType package
 invisible(NULL)

@@ -23,7 +23,7 @@ Bug reports and feature requests can be sent to \href{https://github.com/MarcinK
 \examples{
 \dontrun{
 ## GitHub version
-authoriseGitHub(ClientID, ClientSecret)
+authoriseGitHub(ClientID, ClientSecret) -> github_token
 }
 }
 \author{
@@ -31,8 +31,10 @@ Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
 }
 \seealso{
 Other archivist.github: \code{\link{archive}},
+  \code{\link{archivist.github-package}},
   \code{\link{cloneGitHubRepo}},
   \code{\link{createGitHubRepo}},
-  \code{\link{deleteGitHubRepo}}
+  \code{\link{deleteGitHubRepo}},
+  \code{\link{pushGitHubRepo}}
 }
 

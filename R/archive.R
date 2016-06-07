@@ -1,5 +1,5 @@
-##    archivist package for R
-##		archivist.github package for R
+##  archivist package for R
+##  archivist.github package for R
 ##
 #' @title Archive Artifact to Local and GitHub Repository
 #'
@@ -41,18 +41,10 @@
 #' \dontrun{
 #' 
 #' # empty GitHub Repository creation
-#' 
-#' library(httr)
-#' myapp <- oauth_app("github",
-#'                    key = app_key,
-#'                    secret = app_secret)
-#' github_token <- oauth2.0_token(oauth_endpoints("github"),
-#'                                myapp,
-#'                                scope = "public_repo")
-#' # setting options                              
-#' aoptions("github_token", github_token)
-#' aoptions("user", user)
-#' aoptions("password", user)
+#' authoriseGitHub(ClientID, ClientSecret) -> github_token
+#' # authoriseGitHub also does: aoptions("github_token", github_token)
+#' aoptions("name", user.name)
+#' aoptions("password", user.password)
 #' 
 #' createGitHubRepo("archive-test4", default = TRUE)
 #' ## artifact's archiving
@@ -91,14 +83,14 @@
 #' @rdname archive
 #' @export
 archive <- function(artifact, 
-										commitMessage = aoptions("commitMessage"),
-										repo = aoptions("repo"), 
-										user = aoptions("user"),
-										password = aoptions("password"),
-										alink = aoptions("alink"),
-										artifactName = deparse(substitute(artifact)),
-										verbose = FALSE,
-										...){
+							commitMessage = aoptions("commitMessage"),
+							repo = aoptions("repo"), 
+							user = aoptions("user"),
+							password = aoptions("password"),
+							alink = aoptions("alink"),
+							artifactName = deparse(substitute(artifact)),
+							verbose = FALSE,
+							...){
 	stopifnot(is.character(c(repo, user, password)))
 	stopifnot(is.null(commitMessage) | (length(commitMessage) == 1 & is.character(commitMessage)))
 	stopifnot(length(repo) == 1, length(user) == 1,	length(password) == 1)

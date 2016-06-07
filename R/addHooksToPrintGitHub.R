@@ -1,4 +1,5 @@
-##    archivist package for R
+##  archivist package for R
+##  archivist.github package for R
 ##
 #' @title Add \pkg{archivist} Hooks to \pkg{rmarkdown} HTML Report
 #'

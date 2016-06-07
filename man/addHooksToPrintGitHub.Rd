@@ -52,8 +52,6 @@ Przemyslaw Biecek (\link{addHooksToPrint}), \email{przemyslaw.biecek@gmail.com} 
 Marcin Kosinski (\link{addHooksToPrintGitHub}), \email{m.p.kosinski@gmail.com}
 }
 \seealso{
-Other archivist: \code{\link{archivist-github-integration}},
-  \code{\link{archivist-package}},
-  \code{\link{pushGitHubRepo}}
+Other archivist: \code{\link{archivist-github-integration}}
 }
 

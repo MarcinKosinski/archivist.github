@@ -1,3 +1,6 @@
+##  archivist package for R
+##  archivist.github package for R
+##
 #' @title Authorise with GitHub API
 #'
 #' @description
@@ -21,12 +24,12 @@
 #' @examples
 #' \dontrun{
 #' ## GitHub version
-#' authoriseGitHub(ClientID, ClientSecret)
+#' authoriseGitHub(ClientID, ClientSecret) -> github_token
 #' }
 #' @family archivist.github
 #' @rdname authoriseGitHub
 #' @export
-authoriseGitHub <- function(ClientID,	ClientSecret) {
+authoriseGitHub <- function(ClientID, ClientSecret) {
 	myapp <- oauth_app("github",
 	                    key = ClientID,
 	                    secret = ClientSecret)

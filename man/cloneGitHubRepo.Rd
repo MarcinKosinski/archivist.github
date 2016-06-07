@@ -36,18 +36,10 @@ cloneGitHubRepo("https://github.com/MarcinKosinski/Museum-Extra")
 
 
 # empty Github Repository creation
-
-library(httr)
-myapp <- oauth_app("github",
-                   key = app_key,
-                   secret = app_secret)
-github_token <- oauth2.0_token(oauth_endpoints("github"),
-                               myapp,
-                               scope = "public_repo")
-# setting options                              
-aoptions("github_token", github_token)
-aoptions("name", user_name)
-aoptions("password", user_password)
+authoriseGitHub(ClientID, ClientSecret) -> github_token
+# authoriseGitHub also does: aoptions("github_token", github_token)
+aoptions("name", user.name)
+aoptions("password", user.password)
 
 createEmptyGithubRepo("archive-test4")
 setRemotebRepo(aoptions("name"), "archive-test4")
@@ -84,8 +76,10 @@ Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 }
 \seealso{
 Other archivist.github: \code{\link{archive}},
+  \code{\link{archivist.github-package}},
   \code{\link{authoriseGitHub}},
   \code{\link{createGitHubRepo}},
-  \code{\link{deleteGitHubRepo}}
+  \code{\link{deleteGitHubRepo}},
+  \code{\link{pushGitHubRepo}}
 }
 

@@ -42,21 +42,10 @@
 #' @examples
 #' \dontrun{
 #' 
-#' ########################
-#' #### GitHub version ####
-#' ########################
-#' 
-#' library(httr)
-#' myapp <- oauth_app("github",
-#'                    key = app_key,
-#'                    secret = app_secret)
-#' github_token <- oauth2.0_token(oauth_endpoints("github"),
-#'                                 myapp,
-#'                                 scope = c("public_repo",
-#'                                           "delete_repo"))
-#' aoptions("github_token", github_token)
-#' aoptions("user", user)
-#' aoptions("password", password)
+#' authoriseGitHub(ClientID, ClientSecret) -> github_token
+#' # authoriseGitHub also does: aoptions("github_token", github_token)
+#' aoptions("name", user.name)
+#' aoptions("password", user.password)
 #' 
 #' createGitHubRepo("Museum")
 #' deleteGitHubRepo(repo = "Museum", deleteRoot = TRUE, response = TRUE)
@@ -64,16 +53,16 @@
 #' }
 #' 
 #' @family archivist.github
-#' @rdname deleteRepo
+#' @rdname deleteGitHubRepo
 #' @export
 deleteGitHubRepo <- function(repo,
-														 github_token = aoptions("github_token"), 
-														 user = aoptions("user"),
-														 password = aoptions("password"),
-														 unset = FALSE, 
-														 deleteRoot = FALSE, 
-														 subdir = NULL, 
-														 response = aoptions("response")) {
+										 github_token = aoptions("github_token"), 
+										 user = aoptions("user"),
+										 password = aoptions("password"),
+										 unset = FALSE, 
+										 deleteRoot = FALSE, 
+										 subdir = NULL, 
+										 response = aoptions("response")) {
 	stopifnot(is.character(repo) & length(repo) ==1)
 	stopifnot(is.character(user) & length(user)==1)
 	
