@@ -2,10 +2,11 @@
 % Please edit documentation in R/addHooksToPrintGitHub.R
 \name{addHooksToPrintGitHub}
 \alias{addHooksToPrintGitHub}
-\title{Add \pkg{archivist} Hooks to \pkg{rmarkdown} HTML Report and Archive Artifact on GitHub}
+\title{Add \pkg{archivist} Hooks to \pkg{rmarkdown} markdown/LaTeX Reports and Archive Artifact on GitHub}
 \usage{
 addHooksToPrintGitHub(class = "ggplot", repo = aoptions("repo"),
-  user = aoptions("user"), password = aoptions("password"))
+  user = aoptions("user"), password = aoptions("password"),
+  format = "markdown")
 }
 \arguments{
 \item{class}{A character containing a name of class (one or more) that should be archived.}
@@ -17,6 +18,8 @@ If \code{repo = NULL} then hooks will be added to files in local directories.}
 
 \item{password}{A character denoting GitHub user password. Can be set globally with \code{aoptions("password", password)}.
 See \link{agithub}.}
+
+\item{format}{The same as in \link{alink}.}
 }
 \description{
 \code{addHooksToPrintGitHub} adds an overloaded version of the print function for objects of selected class. 
@@ -42,6 +45,8 @@ createGitHubRepo("Museum", default = TRUE) # it does aoptions("repo", "Museum")
 
 addHooksToPrintGitHub(class="ggplot") # takes default parameters from ?aoptions
 qplot(mpg, wt, data = mtcars, geom = "path")
+summaryRemoteRepo()
+showRemoteRepo()
 }
 }
 \author{

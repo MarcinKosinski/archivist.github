@@ -1,7 +1,7 @@
 ##  archivist package for R
 ##  archivist.github package for R
 ##
-#' @title Add \pkg{archivist} Hooks to \pkg{rmarkdown} HTML Report and Archive Artifact on GitHub
+#' @title Add \pkg{archivist} Hooks to \pkg{rmarkdown} markdown/LaTeX Reports and Archive Artifact on GitHub
 #'
 #' @description
 #' \code{addHooksToPrintGitHub} adds an overloaded version of the print function for objects of selected class. 
@@ -14,6 +14,7 @@
 #' @param user A character containing a name of a GitHub user on whose account the \code{repo} is created.
 #' @param password A character denoting GitHub user password. Can be set globally with \code{aoptions("password", password)}.
 #' See \link{agithub}.
+#' @param format The same as in \link{alink}.
 #' 
 #' @author 
 #' Przemyslaw Biecek (\link{addHooksToPrint}), \email{przemyslaw.biecek@@gmail.com} \cr
@@ -43,6 +44,8 @@
 #' 
 #' addHooksToPrintGitHub(class="ggplot") # takes default parameters from ?aoptions
 #' qplot(mpg, wt, data = mtcars, geom = "path")
+#' summaryRemoteRepo()
+#' showRemoteRepo()
 #' }
 #' @family archivist
 #' @rdname addHooksToPrintGitHub
@@ -50,16 +53,16 @@
 addHooksToPrintGitHub <- function(class = "ggplot",
                                   repo = aoptions("repo"),
 																	user = aoptions("user"),
-																	password = aoptions("password")){
-  stopifnot( is.character( class ), 
-             is.character( repoDir ), 
-             (is.null(repo) || is.character( repo )), 
-             is.character( user ) )
+																	password = aoptions("password"),
+																	format = "markdown"){
   
-  # set local repo to repoDir
-  if (!file.exists( repoDir )) 
-    createLocalRepo(repoDir)  
-  setLocalRepo(repoDir)
+	stopifnot(is.character(class), is.character(repo), is.character(user),
+						is.character(password), is.character(format))
+  
+  # # set local repo to repoDir
+  # if (!file.exists( repoDir )) 
+  #   createLocalRepo(repoDir)  
+  # setLocalRepo(repoDir)
   
   for (class1 in class) {
     namespace <- gsub(grep(getAnywhere(paste0("print.",class1))$where, 
@@ -67,23 +70,14 @@ addHooksToPrintGitHub <- function(class = "ggplot",
                       pattern="namespace:", replacement="")
     
     if (length(namespace) == 0) {
-      stop(paste0("The function print.", class1, " has not been found."))
+      stop(paste0("The function print.", class1, " has not been found. Evaluation stopped for further classes."))
     }
     
-    if (is.null(repo)) { # local version
-      fun <- paste0('function(x, ...) {
-                  hash <- saveToRepo(x)
-                    cat("Load: [",hash,"](", repoDir, "/gallery/",hash,".rda)\n", sep="")
-                    ',namespace,':::print.',class1,'(x, ...)
-    }')
-    } else { # remote version
-      fun <- paste0('function(x, ...) {
-                  hash <- saveToRepo(x)
-                  al <- alink(hash, repo = "',repo,'", user = "',user,'", subdir = "',subdir,'")
-                  cat("Load: ", al, "\n", sep="")
+    fun <- paste0('function(x, ...) {
+al <- archive(x, repo = ', repo,', user =', user, ', password = ', password, ', format =', format, ', alink=TRUE)
+                	cat("Load: ", al, "\n", sep="")
                   ',namespace,':::print.',class1,'(x, ...)
-    }')
-    }
+  							  }')
 
     fun <- eval(parse(text=fun))
     veryDirtyHack <- 1

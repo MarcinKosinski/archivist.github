@@ -29,6 +29,7 @@
 #' @importFrom jsonlite unbox
 #' @importFrom digest digest
 #' @importFrom utils tail
+#' @importFrom utils getAnywhere
 #' @import archivist
 #' @importMethodsFrom git2r add
 #' @importMethodsFrom git2r commit
