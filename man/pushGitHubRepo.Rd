@@ -36,6 +36,8 @@ is \code{repoDir}. By default all uncommited artifacts and \code{backpack.db} wi
 \description{
 \code{pushGitHubRepo} adds files, commits them and pushes from Local \link{Repository} to synchronized GitHub one. 
 \code{pullGitHubRepo} pulls (\code{git pull}) changes from remote GitHub \code{Repository} to the correspoding Local one.
+
+This function is well explained on this \href{http://r-bloggers.com/r-hero-saves-backup-city-with-archivist-and-github}{http://r-bloggers.com/r-hero-saves-backup-city-with-archivist-and-github} blog post.
 }
 \details{
 To learn more about  \code{Archivist Integration With GitHub} visit \link{agithub}.
@@ -65,7 +67,7 @@ git2r::status(repository('Museum'))
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 }
 \references{
-More about \pkg{archivis.github} can be found on 
+More about \pkg{archivist.github} can be found on 
 \href{http://marcinkosinski.github.io/archivist.github/}{marcinkosinski.github.io/archivist.github/} 
 and about \pkg{archivist} in posts' history on \href{http://pbiecek.github.io/archivist/Posts.html}{http://pbiecek.github.io/archivist/Posts.html}
 }

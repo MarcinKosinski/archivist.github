@@ -8,6 +8,8 @@
 #' The overloaded function will add all objects of selected class to the \link{Repository} and then will add hooks to the HTML report (generated in \pkg{rmarkdown}) for these objects (\code{artifacts} - \link{archivist-package}).
 #' This is GitHub version of \code{addHooksToPrint} and it automatically stores artifacts on GitHub - see examples.
 #' 
+#' This function is well explained on this \href{http://r-bloggers.com/r-hero-saves-backup-city-with-archivist-and-github}{http://r-bloggers.com/r-hero-saves-backup-city-with-archivist-and-github} blog post.
+#' 
 #' @param class A character containing a name of class (one or more) that should be archived.
 #' @param repo A character containing a name of a GitHub repository on which the Repository is archived.
 #' If \code{repo = NULL} then hooks will be added to files in local directories.

@@ -36,7 +36,9 @@ you should specify them with \link{aoptions} in this case.}
 \code{archive} stores artifacts in the local \link{Repository} and automatically pushes archived
 artifacts to the GitHub \code{Repository} with which the local \code{Repository} is synchronized
 (via \link{createGitHubRepo} or \link{cloneGitHubRepo}). Function stores artifacts on the same
-way as \link{saveToLocalRepo} function.
+way as \link{saveToLocalRepo} function. 
+
+This function is well explained on this \href{http://r-bloggers.com/r-hero-saves-backup-city-with-archivist-and-github}{http://r-bloggers.com/r-hero-saves-backup-city-with-archivist-and-github} blog post.
 }
 \details{
 To learn more about  \code{Archivist Integration With GitHub} visit \link{agithub}.
@@ -91,7 +93,7 @@ showRemoteRepo()
 Marcin Kosinski, \email{m.p.kosinski@gmail.com}
 }
 \references{
-More about \pkg{archivis.github} can be found on 
+More about \pkg{archivist.github} can be found on 
 \href{http://marcinkosinski.github.io/archivist.github/}{marcinkosinski.github.io/archivist.github/} 
 and about \pkg{archivist} in posts' history on \href{http://pbiecek.github.io/archivist/Posts.html}{http://pbiecek.github.io/archivist/Posts.html}
 }

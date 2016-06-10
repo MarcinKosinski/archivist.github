@@ -9,8 +9,10 @@
 #' (via \link{createGitHubRepo} or \link{cloneGitHubRepo}). Function stores artifacts on the same
 #' way as \link{saveToLocalRepo} function. 
 #' 
+#' This function is well explained on this \href{http://r-bloggers.com/r-hero-saves-backup-city-with-archivist-and-github}{http://r-bloggers.com/r-hero-saves-backup-city-with-archivist-and-github} blog post.
+#' 
 #' @references 
-#' More about \pkg{archivis.github} can be found on 
+#' More about \pkg{archivist.github} can be found on 
 #' \href{http://marcinkosinski.github.io/archivist.github/}{marcinkosinski.github.io/archivist.github/} 
 #' and about \pkg{archivist} in posts' history on \href{http://pbiecek.github.io/archivist/Posts.html}{http://pbiecek.github.io/archivist/Posts.html}
 #' 

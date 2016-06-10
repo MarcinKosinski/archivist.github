@@ -25,6 +25,8 @@ See \link{agithub}.}
 \code{addHooksToPrintGitHub} adds an overloaded version of the print function for objects of selected class. 
 The overloaded function will add all objects of selected class to the \link{Repository} and then will add hooks to the HTML report (generated in \pkg{rmarkdown}) for these objects (\code{artifacts} - \link{archivist-package}).
 This is GitHub version of \code{addHooksToPrint} and it automatically stores artifacts on GitHub - see examples.
+
+This function is well explained on this \href{http://r-bloggers.com/r-hero-saves-backup-city-with-archivist-and-github}{http://r-bloggers.com/r-hero-saves-backup-city-with-archivist-and-github} blog post.
 }
 \note{
 One can specify \code{userTags} as in \link{archive} for artifacts by adding \code{"tags"} attribute.

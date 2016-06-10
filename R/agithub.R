@@ -25,7 +25,7 @@
 #' \link{pushGitHubRepo} and \link{pullGitHubRepo} synchronize Local and GitHub (remote) Repository.
 #' 
 #' @references 
-#' More about \pkg{archivis.github} can be found on 
+#' More about \pkg{archivist.github} can be found on 
 #' \href{http://marcinkosinski.github.io/archivist.github/}{marcinkosinski.github.io/archivist.github/} 
 #' and about \pkg{archivist} in posts' history on \href{http://pbiecek.github.io/archivist/Posts.html}{http://pbiecek.github.io/archivist/Posts.html}
 #' 
