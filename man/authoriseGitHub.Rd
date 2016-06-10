@@ -4,12 +4,15 @@
 \alias{authoriseGitHub}
 \title{Authorise with GitHub API}
 \usage{
-authoriseGitHub(ClientID, ClientSecret)
+authoriseGitHub(ClientID, ClientSecret, scope = c("public_repo"))
 }
 \arguments{
 \item{ClientID}{A 20 characters long string with Client ID. See https://github.com/settings/applications/ for more details.}
 
 \item{ClientSecret}{A 40 characters long string with Client Secret. See https://github.com/settings/applications/ for more details.}
+
+\item{scope}{A character vector with the list of availables scopes for the GitHub API token. See \href{https://developer.github.com/v3/oauth/#scopes}{https://developer.github.com/v3/oauth/#scopes}.
+For repository deletion you will need to add \code{"delete_repo"} scope.}
 }
 \description{
 \code{authoriseGitHub} is function that performes OAuth authorisation with GitHub API 

@@ -44,7 +44,8 @@
 #' @examples
 #' \dontrun{
 #' 
-#' authoriseGitHub(ClientID, ClientSecret) -> github_token
+#' authoriseGitHub(ClientID, ClientSecret, 
+#'                 scope = c("public_repo", "delete_repo")) -> github_token
 #' # authoriseGitHub also does: aoptions("github_token", github_token)
 #' aoptions("user", user.name)
 #' aoptions("password", user.password)

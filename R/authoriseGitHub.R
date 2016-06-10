@@ -19,6 +19,9 @@
 #' 
 #' @param ClientSecret A 40 characters long string with Client Secret. See https://github.com/settings/applications/ for more details.
 #' 
+#' @param scope A character vector with the list of availables scopes for the GitHub API token. See \href{https://developer.github.com/v3/oauth/#scopes}{https://developer.github.com/v3/oauth/#scopes}.
+#' For repository deletion you will need to add \code{"delete_repo"} scope.
+#' 
 #' @author 
 #' Przemyslaw Biecek, \email{przemyslaw.biecek@@gmail.com}
 #'
@@ -34,13 +37,13 @@
 #' @family archivist.github
 #' @rdname authoriseGitHub
 #' @export
-authoriseGitHub <- function(ClientID, ClientSecret) {
+authoriseGitHub <- function(ClientID, ClientSecret, scope = c("public_repo")) {
 	myapp <- oauth_app("github",
 	                    key = ClientID,
 	                    secret = ClientSecret)
 	github_token <- oauth2.0_token(oauth_endpoints("github"),
 	                                 myapp,
-	                                 scope = "public_repo")
+	                                 scope = scope)
 	aoptions("github_token", github_token)
 	github_token
 }
