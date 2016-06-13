@@ -4,6 +4,9 @@
   - `authoriseGitHub()` - easier GitHub token creation
   - `addHooksToPrintGitHub()` - equivalent of `archivist::addHooksToPrint` but with `archivist.github::archive()` usage instead of `archivist::asave()/saveToLocalRepo()`
 
+* Minor updates
+  - `createGitHubRepo()` has extended `README.md` file.
+
 * Other
   - Added vignette.
 

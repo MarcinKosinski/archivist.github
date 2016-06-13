@@ -76,7 +76,7 @@ addHooksToPrintGitHub <- function(class = "ggplot",
     }
     
     fun <- paste0('function(x, ...) {
-al <- archive(x, repo = ', repo,', user =', user, ', password = ', password, ', format =', format, ', alink=TRUE)
+al <- archive(x, repo = \"', repo,'\", user = \"', user, '\", password = \"', password, '\", format =\"', format, '\", alink=TRUE)
                 	cat("Load: ", al, "\n", sep="")
                   ',namespace,':::print.',class1,'(x, ...)
   							  }')
