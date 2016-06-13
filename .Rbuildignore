@@ -2,6 +2,7 @@
 ^\.Rproj\.user$
 # Travis scripts
 .travis.yml
+codecov.yml
 scripts
 Gallery
 eRum2016
