@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>cloneGitHubRepo. archivist.github 0.2.1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="
+Marcin Kosinski, &lt;a href='mailto:m.p.kosinski@gmail.com'&gt;m.p.kosinski@gmail.com&lt;/a&gt;
+">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">archivist.github 0.2.1</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Clone Github Repository</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>cloneGitHubRepo(repoURL, repoDir&nbsp;=&nbsp;NULL, default&nbsp;=&nbsp;FALSE, ...)</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>repoURL</dt>
+      <dd>The remote repository to clone.</dd>
+      <dt>repoDir</dt>
+      <dd>Local directory to clone to. If <code>NULL</code>, by default, creates a local directory,
+which corresponds to the name after last <code>/</code> in <code>repoURL</code>.</dd>
+      <dt>default</dt>
+      <dd>Sets cloned Repository as default Local and GitHub Repository. 
+If <code>default = TRUE</code> then <code>repoDir</code> (last piece of <code>repoURL</code>) is set as default Local Repository 
+ and for GitHub repository also the <code>user</code> from  <code>repoURL</code> is set as default GitHub user).</dd>
+      <dt>...</dt>
+      <dd>Further parameters passed to <a href='http://www.inside-r.org/packages/cran/git2r/docs/clone-methods'>clone</a>.</dd>
+    </dl>
+    
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p><code>cloneGitHubRepo</code> is a wrapper around <code>git clone</code> and clones GitHub Repository
+into the <code>repoDir</code> directory.</p>
+  
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+
+      <p>To learn more about  <code>Archivist Integration With GitHub</code> visit <a href='archivist-github-integration.html'>agithub</a>.</p>
+  
+    </div>
+
+    <div class="Note">
+      <h2>Note</h2>
+
+      <p>Bug reports and feature requests can be sent to <a href = 'https://github.com/MarcinKosinski/archivist.github/issues'>https://github.com/MarcinKosinski/archivist.github/issues</a></p>
+  
+    </div>
+
+    <div class="References">
+      <h2>References</h2>
+
+      <p>More about <span class = "pkg">archivist.github</span> can be found on 
+<a href = 'http://marcinkosinski.github.io/archivist.github/'>marcinkosinski.github.io/archivist.github/</a> 
+and about <span class = "pkg">archivist</span> in posts' history on <a href = 'http://pbiecek.github.io/archivist/Posts.html'>http://pbiecek.github.io/archivist/Posts.html</a></p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>## Not run: 
+# 
+# cloneGitHubRepo(&quot;https://github.com/MarcinKosinski/Museum&quot;)
+# cloneGitHubRepo(&quot;https://github.com/MarcinKosinski/Museum-Extra&quot;)
+# 
+# 
+# # empty Github Repository creation
+# authoriseGitHub(ClientID, ClientSecret) -&gt; github_token
+# # authoriseGitHub also does: aoptions(&quot;github_token&quot;, github_token)
+# aoptions(&quot;user&quot;, user.name)
+# aoptions(&quot;password&quot;, user.password)
+# 
+# createEmptyGithubRepo(&quot;archive-test4&quot;)
+# setRemotebRepo(aoptions(&quot;name&quot;), &quot;archive-test4&quot;)
+# ## artifact&#39;s archiving
+# example &lt;- 1:100
+# 
+# # archiving
+# archive(example) -&gt; md5hash_path
+# 
+# ## proof that artifact is really archived
+# showRemoteRepo() # uses options from setGithubRepo
+# # let&#39;s remove przyklad
+# rm(example)
+# # and load it back from md5hash_path
+# aread(md5hash_path)
+# 
+# 
+# # clone example
+# unlink(&quot;archive-test&quot;, recursive = TRUE)
+# cloneGitHubRepo(&#39;https://github.com/MarcinKosinski/archive-test&#39;)
+# setRemoteRepo(aoptions(&quot;name&quot;), &quot;archive-test&quot;)
+# # equivalent is cloneGitHubRepo(&#39;https://github.com/MarcinKosinski/archive-test&#39;, default = TRUE)
+# # check if default is set with
+# # aoptions(&#39;repoDir&#39;); aoptions(&#39;repo&#39;); aoptions(&#39;user&#39;)
+# data(iris)
+# archive(iris)
+# showRemoteRepo()
+# 
+# 
+# ## End(Not run)
+</div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>cloneGitHubRepo</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+Other archivist.github: <code><a href='archive.html'>archive</a></code>,
+  <code><a href='archivist.github-package.html'>archivist.github-package</a></code>,
+  <code><a href='authoriseGitHub.html'>authoriseGitHub</a></code>,
+  <code><a href='createGitHubRepo.html'>createGitHubRepo</a></code>,
+  <code><a href='deleteGitHubRepo.html'>deleteGitHubRepo</a></code>,
+  <code><a href='pushGitHubRepo.html'>pushGitHubRepo</a></code>
+
+    
+    <h2>Author</h2>
+    
+Marcin Kosinski, <a href='mailto:m.p.kosinski@gmail.com'>m.p.kosinski@gmail.com</a>
+
+    
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>archivist-github-integration. archivist.github 0.2.1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="
+Marcin Kosinski, &lt;a href='mailto:m.p.kosinski@gmail.com'&gt;m.p.kosinski@gmail.com&lt;/a&gt;
+">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">archivist.github 0.2.1</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Archivist Integration With GitHub</h1>
+
+<div class="row">
+  <div class="span8">
+        
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>Set of functions to integrate <a href='http://www.inside-r.org/packages/cran/archivist/docs/archivist-package'>archivist-package</a> with
+GitHub API <a href = 'https://developer.github.com/v3/'>https://developer.github.com/v3/</a>.</p>
+  
+      <p>To start working with <span class = "pkg">archivist.github</span> one should run <a href='authoriseGitHub.html'>authoriseGitHub</a> to create an
+<code>OAuth</code> token which is required by every function in this package.</p>
+  
+      <p>It is possible to create new GitHub repository with an empty <span class = "pkg">archivist</span>-like <a href='http://www.inside-r.org/packages/cran/archivist/docs/Repository'>Repository</a>
+with <a href='createGitHubRepo.html'>createGitHubRepo</a> function.</p>
+  
+      <p><a href='archive.html'>archive</a> stores artifacts in the Local
+<code>Repository</code> and automatically pushes archived artifacts to the GitHub
+<code>Repository</code> with which the Local <code>Repository</code> is synchronized.</p>
+  
+      <p><a href='cloneGitHubRepo.html'>cloneGitHubRepo</a> clones GitHub Repository into the local directory.</p>
+  
+      <p><a href='deleteGitHubRepo.html'>deleteGitHubRepo</a> can delete whole GitHub-Repository or only archivist-like Repository
+stored on a GitHub-Repository.</p>
+  
+      <p><a href='pushGitHubRepo.html'>pushGitHubRepo</a> and <a href='pushGitHubRepo.html'>pullGitHubRepo</a> synchronize Local and GitHub (remote) Repository.</p>
+  
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+
+      <p>To use this set of functionalities, one firstly has to authorize himselft to the GitHub API.
+It can be done by creating <a href = 'OAuth application on GitHub'>https://github.com/settings/developers</a>
+(register new application). If you do not know what should be included as <code>callback url</code>, you may 
+use <code>http://localhost:1410</code> for testing purposes.
+When application is created, one will have to copy its <code>Client ID</code> and
+<code>Client Secret</code> and authorize his github user with this application by running those commands:
+ <ul>
+<li> <code>myapp <- oauth_app("github", key = Client_ID, secret = Client_Secret)</code>,
+   </li>
+<li> <code>github_token <- oauth2.0_token(oauth_endpoints("github"), myapp, scope = "public_repo")</code>.
+ </li>
+</ul></p>
+  
+      <p>The <code>scope</code> limits can be found here 
+<a href = 'https://developer.github.com/v3/oauth/#scopes'>https://developer.github.com/v3/oauth/#scopes</a>.
+Basically, this is how you grant an access to your application  and give permissions.
+With such a token one is authorized and can work with GitHub API and <span class = "pkg">archivist</span>
+functions devoted to GitHub integration.</p>
+  
+      <p>To perform GitHub integration operations such as <code>push</code>, <code>pull</code>, <code>commit</code>, <code>add</code> etc.
+a user has to pass his GitHub user name (<code>user.name</code> parameter), user email (<code>user.email</code>
+parameter) and user password (<code>user.password</code> parameter). Those parameters can be set globbaly
+with <code>aoptions("user.email", user.email)</code>, <code>aoptions("user.name", user.name)</code>
+and <code>aoptions("user.password", user.password)</code>.</p>
+  
+    </div>
+
+    <div class="Note">
+      <h2>Note</h2>
+
+      <p>Note that global configuration of the <code>git config</code> is used for initial commit.
+One can later specify local configuration for the repository with <a href='http://www.inside-r.org/packages/cran/git2r/docs/config'>config</a>, e.g
+<code>config(repoName, user.name = "Alice", user.email = "mail_at_gmail.com")</code>.</p>
+  
+      <p>Bug reports and feature requests can be sent to <a href = 'https://github.com/MarcinKosinski/archivist.github/issues'>https://github.com/MarcinKosinski/archivist.github/issues</a></p>
+  
+    </div>
+
+    <div class="References">
+      <h2>References</h2>
+
+      <p>More about <span class = "pkg">archivist.github</span> can be found on 
+<a href = 'http://marcinkosinski.github.io/archivist.github/'>marcinkosinski.github.io/archivist.github/</a> 
+and about <span class = "pkg">archivist</span> in posts' history on <a href = 'http://pbiecek.github.io/archivist/Posts.html'>http://pbiecek.github.io/archivist/Posts.html</a></p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>## Not run: 
+# authoriseGitHub(ClientID, ClientSecret) -&gt; github_token
+# # authoriseGitHub also does: aoptions(&quot;github_token&quot;, github_token)
+# aoptions(&quot;user&quot;, user.name)
+# aoptions(&quot;password&quot;, user.password)
+# 
+# ## here github_token is used
+# createGitHubRepo(&quot;Museum&quot;)
+# createGitHubRepo(&quot;Museum-Extras&quot;, response = TRUE)
+# createGitHubRepo(&quot;Gallery&quot;, readme = NULL)
+# createGitHubRepo(&quot;Landfill&quot;, 
+# repoDescription = &quot;My models and stuff&quot;)
+# 
+# ## End(Not run)
+</div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>agithub</li><li>archivist-github-integration</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+Other archivist: <code><a href='addHooksToPrintGitHub.html'>addHooksToPrintGitHub</a></code>
+
+    
+    <h2>Author</h2>
+    
+Marcin Kosinski, <a href='mailto:m.p.kosinski@gmail.com'>m.p.kosinski@gmail.com</a>
+
+    
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

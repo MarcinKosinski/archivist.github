@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>addHooksToPrintGitHub. archivist.github 0.2.1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="
+Przemyslaw Biecek (&lt;a href='http://www.inside-r.org/packages/cran/archivist/docs/addHooksToPrint'&gt;addHooksToPrint&lt;/a&gt;), &lt;a href='mailto:przemyslaw.biecek@gmail.com'&gt;przemyslaw.biecek@gmail.com&lt;/a&gt; 
+Marcin Kosinski (&lt;a href='addHooksToPrintGitHub.html'&gt;addHooksToPrintGitHub&lt;/a&gt;), &lt;a href='mailto:m.p.kosinski@gmail.com'&gt;m.p.kosinski@gmail.com&lt;/a&gt;
+">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">archivist.github 0.2.1</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Add <span class = "pkg">archivist</span> Hooks to <span class = "pkg">rmarkdown</span> markdown/LaTeX Reports and Archive Artifact on GitHub</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>addHooksToPrintGitHub(class&nbsp;=&nbsp;"ggplot", repo&nbsp;=&nbsp;aoptions("repo"), user&nbsp;=&nbsp;aoptions("user"), password&nbsp;=&nbsp;aoptions("password"), format&nbsp;=&nbsp;"markdown")</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>class</dt>
+      <dd>A character containing a name of class (one or more) that should be archived.</dd>
+      <dt>repo</dt>
+      <dd>A character containing a name of a GitHub repository on which the Repository is archived.
+If <code>repo = NULL</code> then hooks will be added to files in local directories.</dd>
+      <dt>user</dt>
+      <dd>A character containing a name of a GitHub user on whose account the <code>repo</code> is created.</dd>
+      <dt>password</dt>
+      <dd>A character denoting GitHub user password. Can be set globally with <code>aoptions("password", password)</code>.
+See <a href='archivist-github-integration.html'>agithub</a>.</dd>
+      <dt>format</dt>
+      <dd>The same as in <a href='http://www.inside-r.org/packages/cran/archivist/docs/alink'>alink</a>.</dd>
+    </dl>
+    
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p><code>addHooksToPrintGitHub</code> adds an overloaded version of the print function for objects of selected class. 
+The overloaded function will add all objects of selected class to the <a href='http://www.inside-r.org/packages/cran/archivist/docs/Repository'>Repository</a> and then will add hooks to the HTML report (generated in <span class = "pkg">rmarkdown</span>) for these objects (<code>artifacts</code> - <a href='http://www.inside-r.org/packages/cran/archivist/docs/archivist-package'>archivist-package</a>).
+This is GitHub version of <code>addHooksToPrint</code> and it automatically stores artifacts on GitHub - see examples.</p>
+  
+      <p>This function is well explained on this <a href = 'http://r-bloggers.com/r-hero-saves-backup-city-with-archivist-and-github'>http://r-bloggers.com/r-hero-saves-backup-city-with-archivist-and-github</a> blog post.</p>
+  
+    </div>
+
+    <div class="Note">
+      <h2>Note</h2>
+
+      <p>One can specify <code>userTags</code> as in <a href='archive.html'>archive</a> for artifacts by adding <code>"tags"</code> attribute.
+See note secion about that in <a href='archive.html'>archive</a>.</p>
+  
+      <p>Bug reports and feature requests can be sent to <a href = 'https://github.com/pbiecek/archivist/issues'>https://github.com/pbiecek/archivist/issues</a></p>
+  
+    </div>
+
+    <div class="References">
+      <h2>References</h2>
+
+      <p>More about <span class = "pkg">archivist.github</span> can be found on 
+<a href = 'http://marcinkosinski.github.io/archivist.github/'>marcinkosinski.github.io/archivist.github/</a> 
+and about <span class = "pkg">archivist</span> in posts' history on <a href = 'http://pbiecek.github.io/archivist/Posts.html'>http://pbiecek.github.io/archivist/Posts.html</a></p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>
+## Not run: 
+# # only in Rmd report, links to GitHub repository and archive artifact
+# #&#39; # empty GitHub Repository creation
+# authoriseGitHub(ClientID, ClientSecret) -&gt; github_token
+# # authoriseGitHub also does: aoptions(&quot;github_token&quot;, github_token)
+# aoptions(&quot;user&quot;, user.name)
+# aoptions(&quot;password&quot;, user.password)
+# createGitHubRepo(&quot;Museum&quot;, default = TRUE) # it does aoptions(&quot;repo&quot;, &quot;Museum&quot;)
+# 
+# addHooksToPrintGitHub(class=&quot;ggplot&quot;) # takes default parameters from ?aoptions
+# qplot(mpg, wt, data = mtcars, geom = &quot;path&quot;)
+# summaryRemoteRepo()
+# showRemoteRepo()
+# ## End(Not run)
+</div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>addHooksToPrintGitHub</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+Other archivist: <code><a href='archivist-github-integration.html'>archivist-github-integration</a></code>
+
+    
+    <h2>Author</h2>
+    
+Przemyslaw Biecek (<a href='http://www.inside-r.org/packages/cran/archivist/docs/addHooksToPrint'>addHooksToPrint</a>), <a href='mailto:przemyslaw.biecek@gmail.com'>przemyslaw.biecek@gmail.com</a> 
+Marcin Kosinski (<a href='addHooksToPrintGitHub.html'>addHooksToPrintGitHub</a>), <a href='mailto:m.p.kosinski@gmail.com'>m.p.kosinski@gmail.com</a>
+
+    
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

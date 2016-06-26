@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>archive. archivist.github 0.2.1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="
+Marcin Kosinski, &lt;a href='mailto:m.p.kosinski@gmail.com'&gt;m.p.kosinski@gmail.com&lt;/a&gt;
+">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">archivist.github 0.2.1</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Archive Artifact to Local and GitHub Repository</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>archive(artifact, commitMessage&nbsp;=&nbsp;aoptions("commitMessage"), repo&nbsp;=&nbsp;aoptions("repo"), user&nbsp;=&nbsp;aoptions("user"), password&nbsp;=&nbsp;aoptions("password"), alink&nbsp;=&nbsp;aoptions("alink"), artifactName&nbsp;=&nbsp;deparse(substitute(artifact)), verbose&nbsp;=&nbsp;FALSE, ...)</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>artifact</dt>
+      <dd>An artifact to be archived on Local and Github <a href='http://www.inside-r.org/packages/cran/archivist/docs/Repository'>Repository</a>.</dd>
+      <dt>commitMessage</dt>
+      <dd>A character denoting a message added to the commit while archiving <code>artifact</code> on GitHub Repository.
+By default, an artifact's <a href='http://www.inside-r.org/packages/cran/archivist/docs/md5hash'>md5hash</a> is added to the commit message when it is specified to <code>NULL</code>.</dd>
+      <dt>repo</dt>
+      <dd>A character denoting GitHub repository name and synchronized local existing directory in which an artifact will be saved.</dd>
+      <dt>user</dt>
+      <dd>A character denoting GitHub user name. Can be set globally with <code>aoptions("user", user)</code>.
+See <a href='archivist-github-integration.html'>agithub</a>.</dd>
+      <dt>password</dt>
+      <dd>A character denoting GitHub user password. Can be set globally with <code>aoptions("password", password)</code>.
+See <a href='archivist-github-integration.html'>agithub</a>.</dd>
+      <dt>alink</dt>
+      <dd>Logical. Whether the result should be put into <a href='http://www.inside-r.org/packages/cran/archivist/docs/alink'>alink</a> function. If you would like to pass further arguments to <code>alink</code> then
+you should specify them with <a href='http://www.inside-r.org/packages/cran/archivist/docs/archivistOptions'>aoptions</a> in this case.</dd>
+      <dt>artifactName</dt>
+      <dd>The name of the artifact with which it should be archived. If <code>NULL</code> then object's MD5 hash will be used instead.</dd>
+      <dt>verbose</dt>
+      <dd>A logical value. If TRUE then additional messages will be printed out.</dd>
+      <dt>...</dt>
+      <dd>Further arguments passed to <a href='http://www.inside-r.org/packages/cran/archivist/docs/saveToRepo'>saveToLocalRepo</a> function.</dd>
+    </dl>
+    
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p><code>archive</code> stores artifacts in the local <a href='http://www.inside-r.org/packages/cran/archivist/docs/Repository'>Repository</a> and automatically pushes archived
+artifacts to the GitHub <code>Repository</code> with which the local <code>Repository</code> is synchronized
+(via <a href='createGitHubRepo.html'>createGitHubRepo</a> or <a href='cloneGitHubRepo.html'>cloneGitHubRepo</a>). Function stores artifacts on the same
+way as <a href='http://www.inside-r.org/packages/cran/archivist/docs/saveToRepo'>saveToLocalRepo</a> function.</p>
+  
+      <p>This function is well explained on this <a href = 'http://r-bloggers.com/r-hero-saves-backup-city-with-archivist-and-github'>http://r-bloggers.com/r-hero-saves-backup-city-with-archivist-and-github</a> blog post.</p>
+  
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+
+      <p>To learn more about  <code>Archivist Integration With GitHub</code> visit <a href='archivist-github-integration.html'>agithub</a>.</p>
+  
+    </div>
+
+    <div class="Note">
+      <h2>Note</h2>
+
+      <p>Bug reports and feature requests can be sent to <a href = 'https://github.com/MarcinKosinski/archivist.github/issues'>https://github.com/MarcinKosinski/archivist.github/issues</a></p>
+  
+    </div>
+
+    <div class="References">
+      <h2>References</h2>
+
+      <p>More about <span class = "pkg">archivist.github</span> can be found on 
+<a href = 'http://marcinkosinski.github.io/archivist.github/'>marcinkosinski.github.io/archivist.github/</a> 
+and about <span class = "pkg">archivist</span> in posts' history on <a href = 'http://pbiecek.github.io/archivist/Posts.html'>http://pbiecek.github.io/archivist/Posts.html</a></p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>## Not run: 
+# 
+# # empty GitHub Repository creation
+# authoriseGitHub(ClientID, ClientSecret) -&gt; github_token
+# # authoriseGitHub also does: aoptions(&quot;github_token&quot;, github_token)
+# aoptions(&quot;user&quot;, user.name)
+# aoptions(&quot;password&quot;, user.password)
+# 
+# createGitHubRepo(&quot;archive-test4&quot;, default = TRUE)
+# ## artifact&#39;s archiving
+# exampleVec &lt;- 1:100
+# 
+# # archiving
+# archive(exampleVec) -&gt; md5hash_path
+# 
+# ## proof that artifact is really archived
+# showGithubRepo() # uses options from setGithubRepo
+# # let&#39;s remove exampleVec
+# rm(exampleVec)
+# # and load it back from md5hash_path
+# aread(md5hash_path)
+# 
+# 
+# # clone example
+# unlink(&quot;archive-test&quot;, recursive = TRUE)
+# cloneGithubRepo(&#39;https://github.com/MarcinKosinski/archive-test&#39;)
+# setRemoteRepo(aoptions(&quot;user&quot;), &quot;archive-test&quot;)
+# data(iris)
+# archive(iris)
+# showRemoteRepo()
+# 
+# ## alink() option
+# vectorLong &lt;- 1:100
+# vectorShort &lt;- 1:20
+# # archiving
+# alink(archive(vectorLong))
+# archive(vectorShort, alink = TRUE)
+# showRemoteRepo()
+# 
+# 
+# ## End(Not run)
+</div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>archive</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+Other archivist.github: <code><a href='archivist.github-package.html'>archivist.github-package</a></code>,
+  <code><a href='authoriseGitHub.html'>authoriseGitHub</a></code>,
+  <code><a href='cloneGitHubRepo.html'>cloneGitHubRepo</a></code>,
+  <code><a href='createGitHubRepo.html'>createGitHubRepo</a></code>,
+  <code><a href='deleteGitHubRepo.html'>deleteGitHubRepo</a></code>,
+  <code><a href='pushGitHubRepo.html'>pushGitHubRepo</a></code>
+
+    
+    <h2>Author</h2>
+    
+Marcin Kosinski, <a href='mailto:m.p.kosinski@gmail.com'>m.p.kosinski@gmail.com</a>
+
+    
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

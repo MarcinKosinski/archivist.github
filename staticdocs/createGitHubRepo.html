@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>createGitHubRepo. archivist.github 0.2.1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="
+Marcin Kosinski, &lt;a href='mailto:m.p.kosinski@gmail.com'&gt;m.p.kosinski@gmail.com&lt;/a&gt;
+">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">archivist.github 0.2.1</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Create an Empty Repository on GitHub</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>createGitHubRepo(repo, github_token&nbsp;=&nbsp;aoptions("github_token"), user&nbsp;=&nbsp;aoptions("user"), repoDir&nbsp;=&nbsp;NULL, password&nbsp;=&nbsp;aoptions("password"), repoDescription&nbsp;=&nbsp;aoptions("repoDescription"), readmeDescription&nbsp;=&nbsp;aoptions("readmeDescription"), response&nbsp;=&nbsp;aoptions("response"), default&nbsp;=&nbsp;FALSE, verbose&nbsp;=&nbsp;FALSE, ...)</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>repo</dt>
+      <dd>While working with a Github repository. A character denoting new GitHub repository name. White spaces will be substitued with a dash.</dd>
+      <dt>github_token</dt>
+      <dd>While working with a Github repository. An OAuth GitHub Token created with the <a href='http://www.inside-r.org/packages/cran/httr/docs/oauth2.0_token'>oauth2.0_token</a> function. See <a href='archivist-github-integration.html'>archivist-github-integration</a>.
+Can be set globally with <code>aoptions("github_token", github_token)</code>.</dd>
+      <dt>user</dt>
+      <dd>While working with a Github repository. A character denoting GitHub user name. Can be set globally with <code>aoptions("user", user)</code>.
+See <a href='archivist-github-integration.html'>archivist-github-integration</a>.</dd>
+      <dt>repoDir</dt>
+      <dd>A character that specifies the directory for the Repository which is to be made. While working with GitHub Repository, this will
+be the directory of the synchronized Local Repository, in which the new Local Repository will be created (is <code>NULL</code> then is the same as <code>repo</code>).</dd>
+      <dt>password</dt>
+      <dd>While working with a Github repository. A character denoting GitHub user password. Can be set globally with <code>aoptions("password", password)</code>.
+See <a href='archivist-github-integration.html'>archivist-github-integration</a>.</dd>
+      <dt>repoDescription</dt>
+      <dd>While working with a Github repository. A character specifing the new GitHub repository description.</dd>
+      <dt>readmeDescription</dt>
+      <dd>While working with a Github repository. A character of the content of <code>README.md</code> file. By default a description of <a href='http://www.inside-r.org/packages/cran/archivist/docs/Repository'>Repository</a>.
+Can be set globally with <code>aoptions("readmeDescription", readmeDescription)</code>. In order to omit 
+<code>README.md</code> file set <code>aoptions("readmeDescription", NULL)</code>.</dd>
+      <dt>response</dt>
+      <dd>A logical value. Should the GitHub API response be returned.</dd>
+      <dt>default</dt>
+      <dd>If <code>default = TRUE</code> then <code>repoDir</code> (<code>repo</code>) is set as default local repository. Also the <code>user</code> is set as default GitHub user.</dd>
+      <dt>verbose</dt>
+      <dd>A logical value. If TRUE then additional messages will be printed out.</dd>
+      <dt>...</dt>
+      <dd>further arguments passed to <a href='http://www.inside-r.org/packages/cran/archivist/docs/createEmptyRepo'>createLocalRepo</a> such as <code>force</code>.</dd>
+    </dl>
+    
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p><code>createGitHubRepo</code> is a GitHub version of <a href='http://www.inside-r.org/packages/cran/archivist/docs/createEmptyRepo'>createLocalRepo</a> and creates a new GitHub repository 
+with an empty <span class = "pkg">archivist</span>-like <a href='http://www.inside-r.org/packages/cran/archivist/docs/Repository'>Repository</a>. It also creates a Local <code>Repository</code> which is git-synchronized with
+new GitHub repository.</p>
+  
+      <p>This function is well explained on this <a href = 'http://r-bloggers.com/r-hero-saves-backup-city-with-archivist-and-github'>http://r-bloggers.com/r-hero-saves-backup-city-with-archivist-and-github</a> blog post.</p>
+  
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+
+      <p>To learn more about  <code>Archivist Integration With GitHub</code> visit <a href='archivist-github-integration.html'>agithub</a>.</p>
+  
+      <p>At least one Repository must be initialized before using other functions from the <span class = "pkg">archivist.github</span> package. 
+While working in groups, it is highly recommended to create a Repository on a shared Dropbox/GitHub folder.</p>
+  
+      <p>All artifacts which are desired to be archived are going to be saved in the local Repository, which is an SQLite 
+database stored in a file named <code>backpack</code>. 
+After calling <code>saveToLocalRepo</code> function, each artifact will be archived in a <code>md5hash.rda</code> file. 
+This file will be saved in a folder (under <code>repoDir</code> directory) named 
+<code>gallery</code>. For every artifact, <code>md5hash</code> is a unique string of length 32 that is produced by
+<a href='http://www.inside-r.org/packages/cran/digest/docs/digest'>digest</a> function, which uses a cryptographical MD5 hash algorithm.</p>
+  
+      <p>To learn more about artifacts visit <a href='http://www.inside-r.org/packages/cran/archivist/docs/archivist-package'>archivist-package</a>.</p>
+  
+      <p>Created <code>backpack</code> database is a useful and fundamental tool for remembering artifact's 
+<code>name</code>, <code>class</code>, <code>archiving date</code> etc. (the so called <a href='http://www.inside-r.org/packages/cran/archivist/docs/Tags'>Tags</a>)
+or for keeping artifact's <code>md5hash</code>.</p>
+  
+      <p>Besides the <code>backpack</code> database, <code>gallery</code> folder is created in which all 
+artifacts will be archived.</p>
+  
+      <p>After every <code>saveToLocalRepo</code> call the database is refreshed. As a result, the artifact is available 
+immediately in <code>backpack.db</code> database for other collaborators.</p>
+  
+    </div>
+
+    <div class="Note">
+      <h2>Note</h2>
+
+      <p>Bug reports and feature requests can be sent to <a href = 'https://github.com/MarcinKosinski/archivist.github/issues'>https://github.com/MarcinKosinski/archivist.github/issues</a></p>
+  
+    </div>
+
+    <div class="References">
+      <h2>References</h2>
+
+      <p>More about <span class = "pkg">archivist.github</span> can be found on 
+<a href = 'http://marcinkosinski.github.io/archivist.github/'>marcinkosinski.github.io/archivist.github/</a> 
+and about <span class = "pkg">archivist</span> in posts' history on <a href = 'http://pbiecek.github.io/archivist/Posts.html'>http://pbiecek.github.io/archivist/Posts.html</a></p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>## Not run: 
+# # empty GitHub Repository creation
+# authoriseGitHub(ClientID, ClientSecret) -&gt; github_token
+# # authoriseGitHub also does: aoptions(&quot;github_token&quot;, github_token)
+# aoptions(&quot;user&quot;, user.name)
+# aoptions(&quot;password&quot;, user.password)
+# 
+# createGitHubRepo(&quot;Museum&quot;)
+# createGitHubRepo(&quot;Museum-Extras&quot;, response = TRUE)
+# createGitHubRepo(&quot;Gallery&quot;, readmeDescription = NULL)
+# createGitHubRepo(&quot;Landfill&quot;, 
+# repoDescription = &quot;My models and stuff&quot;) 
+# createGitHubRepo(&quot;MuseumYYYY&quot;, repoDir = &quot;Museum_YY&quot;)
+# createGitHubRepo(&quot;archive-test4&quot;, default = TRUE)
+# 
+# ## artifact&#39;s archiving
+# przyklad &lt;- 1:100
+# 
+# # archiving
+# archive(przyklad) -&gt; md5hash_path
+# 
+# ## proof that artifact is really archived
+# showRemoteRepo() # uses options from setGithubRepo
+# # let&#39;s remove przyklad
+# rm(przyklad)
+# # and load it back from md5hash_path
+# aread(md5hash_path)
+# 
+# 
+# # clone example
+# unlink(&quot;archive-test&quot;, recursive = TRUE)
+# cloneGithubRepo(&#39;https://github.com/MarcinKosinski/archive-test&#39;)
+# setRemoteRepo(aoptions(&quot;user&quot;), &quot;archive-test&quot;)
+# data(iris)
+# archive(iris)
+# showRemoteRepo()
+# 
+# ## End(Not run)
+</div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>createGitHubRepo</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+Other archivist.github: <code><a href='archive.html'>archive</a></code>,
+  <code><a href='archivist.github-package.html'>archivist.github-package</a></code>,
+  <code><a href='authoriseGitHub.html'>authoriseGitHub</a></code>,
+  <code><a href='cloneGitHubRepo.html'>cloneGitHubRepo</a></code>,
+  <code><a href='deleteGitHubRepo.html'>deleteGitHubRepo</a></code>,
+  <code><a href='pushGitHubRepo.html'>pushGitHubRepo</a></code>
+
+    
+    <h2>Author</h2>
+    
+Marcin Kosinski, <a href='mailto:m.p.kosinski@gmail.com'>m.p.kosinski@gmail.com</a>
+
+    
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

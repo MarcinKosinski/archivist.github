@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>pushGitHubRepo. archivist.github 0.2.1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="
+Marcin Kosinski, &lt;a href='mailto:m.p.kosinski@gmail.com'&gt;m.p.kosinski@gmail.com&lt;/a&gt;
+">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">archivist.github 0.2.1</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Push and Pull for Repository</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>pushGitHubRepo(repoDir&nbsp;=&nbsp;aoptions("repoDir"), commitMessage&nbsp;=&nbsp;aoptions("commitMessage"), repo&nbsp;=&nbsp;aoptions("repo"), user&nbsp;=&nbsp;aoptions("user"), password&nbsp;=&nbsp;aoptions("password"), files&nbsp;=&nbsp;c("gallery", "backpack.db"), ...)</div>
+<div>pullGitHubRepo(repoDir&nbsp;=&nbsp;aoptions("repoDir"), user&nbsp;=&nbsp;aoptions("user"), password&nbsp;=&nbsp;aoptions("password"), ...)</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>repoDir</dt>
+      <dd>A character specifing the directory to Local <code>Repository</code> to/from which artifacts will be pulled/pushed to GitHub.</dd>
+      <dt>commitMessage</dt>
+      <dd>A character denoting a message added to the commit while performing push.
+By default specified to <code>NULL</code> which corresponds to commit message <code>archivist: pushGitHubRepo</code>.</dd>
+      <dt>repo</dt>
+      <dd>A character denoting GitHub repository name and synchronized local existing directory in which an artifact will be saved.</dd>
+      <dt>user</dt>
+      <dd>A character denoting GitHub user name. Can be set globally with <code>aoptions("user", user)</code>.
+See <a href='archivist-github-integration.html'>archivist-github-integration</a>.</dd>
+      <dt>password</dt>
+      <dd>A character denoting GitHub user password. Can be set globally with <code>aoptions("password", password)</code>.
+See <a href='archivist-github-integration.html'>archivist-github-integration</a>.</dd>
+      <dt>files</dt>
+      <dd>A character vector containing directories to files that should be commited and pushed. The working directory
+is <code>repoDir</code>. By default all uncommited artifacts and <code>backpack.db</code> will be pushed.</dd>
+      <dt>...</dt>
+      <dd>Further arguments passed to <a href='http://www.inside-r.org/packages/cran/git2r/docs/push-methods'>push</a> or <a href='http://www.inside-r.org/packages/cran/git2r/docs/pull-methods'>pull</a>.</dd>
+    </dl>
+    
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p><code>pushGitHubRepo</code> adds files, commits them and pushes from Local <a href='http://www.inside-r.org/packages/cran/archivist/docs/Repository'>Repository</a> to synchronized GitHub one. 
+<code>pullGitHubRepo</code> pulls (<code>git pull</code>) changes from remote GitHub <code>Repository</code> to the correspoding Local one.</p>
+  
+      <p>This function is well explained on this <a href = 'http://r-bloggers.com/r-hero-saves-backup-city-with-archivist-and-github'>http://r-bloggers.com/r-hero-saves-backup-city-with-archivist-and-github</a> blog post.</p>
+  
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+
+      <p>To learn more about  <code>Archivist Integration With GitHub</code> visit <a href='archivist-github-integration.html'>agithub</a>.
+To check the <code>status</code> (<code>git status</code>) of the Repository use <code>git2r::status(repository(repoDir))</code>. See examples.</p>
+  
+    </div>
+
+    <div class="Note">
+      <h2>Note</h2>
+
+      <p>Bug reports and feature requests can be sent to <a href = 'https://github.com/MarcinKosinski/archivist.github/issues'>https://github.com/MarcinKosinski/archivist.github/issues</a></p>
+  
+    </div>
+
+    <div class="References">
+      <h2>References</h2>
+
+      <p>More about <span class = "pkg">archivist.github</span> can be found on 
+<a href = 'http://marcinkosinski.github.io/archivist.github/'>marcinkosinski.github.io/archivist.github/</a> 
+and about <span class = "pkg">archivist</span> in posts' history on <a href = 'http://pbiecek.github.io/archivist/Posts.html'>http://pbiecek.github.io/archivist/Posts.html</a></p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>## Not run: 
+# 
+# authoriseGitHub(ClientID, ClientSecret) -&gt; github_token
+# # authoriseGitHub also does: aoptions(&quot;github_token&quot;, github_token)
+# aoptions(&quot;user&quot;, user.name)
+# aoptions(&quot;password&quot;, user.password)
+# 
+# createGitHubRepo(&quot;Museum&quot;, default = TRUE) # here github_token is used
+# data(iris)
+# saveToLocalRepo(iris)
+# git2r::status(repository(&#39;Museum&#39;))
+# pushGitHubRepo(commitMessage = &quot;add iris&quot;)
+# git2r::status(repository(&#39;Museum&#39;))
+# 
+# ## End(Not run)
+</div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>pullGitHubRepo</li><li>pullGithubRepo</li><li>pushGitHubRepo</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+Other archivist.github: <code><a href='archive.html'>archive</a></code>,
+  <code><a href='archivist.github-package.html'>archivist.github-package</a></code>,
+  <code><a href='authoriseGitHub.html'>authoriseGitHub</a></code>,
+  <code><a href='cloneGitHubRepo.html'>cloneGitHubRepo</a></code>,
+  <code><a href='createGitHubRepo.html'>createGitHubRepo</a></code>,
+  <code><a href='deleteGitHubRepo.html'>deleteGitHubRepo</a></code>
+
+    
+    <h2>Author</h2>
+    
+Marcin Kosinski, <a href='mailto:m.p.kosinski@gmail.com'>m.p.kosinski@gmail.com</a>
+
+    
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>
