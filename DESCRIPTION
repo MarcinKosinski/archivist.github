@@ -1,5 +1,5 @@
 Package: archivist.github
-Version: 0.2.0
+Version: 0.2.1
 Type: Package
 Title: Tools for Archiving, Managing and Sharing R Objects via GitHub
 Authors@R: c(

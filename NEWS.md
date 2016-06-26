@@ -1,3 +1,8 @@
+# Ver 0.2.1
+
+* Minor updates
+  - Proper extension of `createGitHubRepo()` feature that produce `README.md`.
+
 # Ver 0.2.0
 
 * New functions
