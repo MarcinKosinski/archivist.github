@@ -9,7 +9,7 @@
 =====================================================
 
 ````{R}
-install.github('archivist.github')
+install.packages('archivist.github')
 browseVignettes('archivist.github')
 ````
 
