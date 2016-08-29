@@ -1,3 +1,8 @@
+# Ver 0.2.2
+
+- VignetteBuilder: knitr added to DESCRIPTION, due to missing vignettes on CRAN
+
+
 # Ver 0.2.1
 
 * Minor updates

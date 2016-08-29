@@ -1,6 +1,6 @@
 ---
 title: archivist and GitHub integration archivist.github
-author: Marcin Kosiński
+author: Marcin Kosinski
 output:
   html_document:
     mathjax:  default

@@ -5,6 +5,7 @@ r_packages:
   - jsonlite
   - httr
   - digest
+  - knitr
 r_github_packages:
   - jimhester/covr
 
