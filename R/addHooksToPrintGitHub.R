@@ -75,8 +75,8 @@ addHooksToPrintGitHub <- function(class = "ggplot",
       stop(paste0("The function print.", class1, " has not been found. Evaluation stopped for further classes."))
     }
     
-    fun <- paste0('function(x, ...) {
-al <- archive(x, repo = \"', repo,'\", user = \"', user, '\", password = \"', password, '\", format =\"', format, '\", alink=TRUE)
+    fun <- paste0('function(x, artifactName = deparse(substitute(x)), ...) {
+al <- archive(x, artifactName = artifactName, repo = \"', repo,'\", user = \"', user, '\", password = \"', password, '\", format =\"', format, '\", alink=TRUE)
                 	cat("Load: ", al, "\n", sep="")
                   ',namespace,':::print.',class1,'(x, ...)
   							  }')
