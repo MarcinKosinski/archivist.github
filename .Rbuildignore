@@ -4,7 +4,8 @@
 .travis.yml
 codecov.yml
 scripts
-Gallery
-eRum2016
+Gallery/
+eRum2016/
 ^.*\.rda$
 ^appveyor\.yml$
+staticdocs/

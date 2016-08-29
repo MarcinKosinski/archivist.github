@@ -17,9 +17,14 @@ browseVignettes('archivist.github')
 
 [RHero saves Backup City with archivist and GitHub](https://r-bloggers.com/rhero-saves-backup-city-with-archivist-and-github)
 
-![Workflow of archivist.github package](https://raw.githubusercontent.com/MarcinKosinski/archivist.github/master/scripts/archivist.github_workflow_ver2.png)
+![Workflow of archivist.github package](https://raw.githubusercontent.com/MarcinKosinski/archivist.github/master/vignettes/archivist.github_workflow.png)
 
 
 
 
-![R Heroes](https://raw.githubusercontent.com/MarcinKosinski/archivist.github/master/scripts/archivist_rhero.png)
+![R Heroes](https://raw.githubusercontent.com/MarcinKosinski/archivist.github/master/vignettes/archivist_github.png)
+
+
+Thanks to [pedzlenie](www.facebook.com/pedzlenie) for paintings!
+
+![octo-cat](https://raw.githubusercontent.com/MarcinKosinski/archivist.github/master/vignettes/github_R.jpg)
