@@ -17,7 +17,7 @@ browseVignettes('archivist.github')
 
 [RHero saves Backup City with archivist and GitHub](https://r-bloggers.com/rhero-saves-backup-city-with-archivist-and-github)
 
-![Workflow of archivist.github package](https://raw.githubusercontent.com/MarcinKosinski/archivist.github/master/vignettes/archivist.github_workflow.png)
+![Workflow of archivist.github package](https://raw.githubusercontent.com/MarcinKosinski/archivist.github/master/vignettes/archivist_github_workflow.png)
 
 
 
