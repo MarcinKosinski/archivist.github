@@ -13,16 +13,14 @@ install.packages('archivist.github')
 browseVignettes('archivist.github')
 ````
 
+![Workflow of archivist.github package](https://raw.githubusercontent.com/MarcinKosinski/archivist.github/master/vignettes/archivist_github_workflow.png)
+
 ## Blog posts
 
 [RHero saves Backup City with archivist and GitHub](https://r-bloggers.com/rhero-saves-backup-city-with-archivist-and-github)
 
-![Workflow of archivist.github package](https://raw.githubusercontent.com/MarcinKosinski/archivist.github/master/vignettes/archivist_github_workflow.png)
 
-
-
-
-![R Heroes](https://raw.githubusercontent.com/MarcinKosinski/archivist.github/master/vignettes/archivist_github.png)
+![R Heroes](https://raw.githubusercontent.com/MarcinKosinski/archivist.github/master/images/archivist_github.png)
 
 
 Thanks to [pedzlenie](www.facebook.com/pedzlenie) for paintings!

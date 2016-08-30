@@ -27,9 +27,9 @@ opts_chunk$set(
 	eval = TRUE
 )
 ```
-<img src="archivist_github.png" class="fit image">
+<img src="archivist_github.jpg" class="fit image">
 
-> This vignette provides useful links for version 0.2.0.
+> This vignette provides useful links for version 0.2.2.
 
 # CRAN index
 

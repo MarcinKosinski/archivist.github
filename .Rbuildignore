@@ -9,3 +9,4 @@ eRum2016/
 ^.*\.rda$
 ^appveyor\.yml$
 staticdocs/
+images/
