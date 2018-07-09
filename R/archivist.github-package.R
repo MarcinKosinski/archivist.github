@@ -39,21 +39,19 @@
 #' @importFrom utils tail
 #' @importFrom utils getAnywhere
 #' @import archivist
-#' @importMethodsFrom git2r add
-#' @importMethodsFrom git2r commit
-#' @importMethodsFrom git2r push
-#' @importMethodsFrom git2r pull
-#' @importMethodsFrom git2r init
-#' @importMethodsFrom git2r remote_add
-#' @importMethodsFrom git2r clone
-#' @importMethodsFrom git2r repository
-#' @importMethodsFrom git2r discover_repository
-#' @importMethodsFrom git2r in_repository
-#' @importMethodsFrom git2r cred_user_pass
-#' @importClassesFrom git2r cred_user_pass
-#' @importClassesFrom git2r git_repository
-#' 
-#' 
+#' @importFrom git2r add
+#' @importFrom git2r commit
+#' @importFrom git2r push
+#' @importFrom git2r pull
+#' @importFrom git2r init
+#' @importFrom git2r remote_add
+#' @importFrom git2r clone
+#' @importFrom git2r repository
+#' @importFrom git2r discover_repository
+#' @importFrom git2r in_repository
+#' @importFrom git2r cred_user_pass
+#'
+#'
 #' @family archivist.github
 #' @name archivist.github-package
 #' @docType package
