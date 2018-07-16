@@ -1,5 +1,5 @@
 Package: archivist.github
-Version: 0.2.2
+Version: 0.2.3
 Type: Package
 Title: Tools for Archiving, Managing and Sharing R Objects via GitHub
 Authors@R: c(
@@ -25,7 +25,6 @@ Suggests:
     knitr
 BugReports: https://github.com/MarcinKosinski/archivist.github/issues
 URL: http://marcinkosinski.github.io/archivist.github/
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
 NeedsCompilation: no
 VignetteBuilder: knitr
-
