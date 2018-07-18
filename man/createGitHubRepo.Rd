@@ -115,9 +115,6 @@ showRemoteRepo()
 
 }
 }
-\author{
-Marcin Kosinski, \email{m.p.kosinski@gmail.com}
-}
 \references{
 More about \pkg{archivist.github} can be found on 
 \href{http://marcinkosinski.github.io/archivist.github/}{marcinkosinski.github.io/archivist.github/} 
@@ -131,4 +128,6 @@ Other archivist.github: \code{\link{archive}},
   \code{\link{deleteGitHubRepo}},
   \code{\link{pushGitHubRepo}}
 }
-
+\author{
+Marcin Kosinski, \email{m.p.kosinski@gmail.com}
+}

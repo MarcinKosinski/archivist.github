@@ -29,9 +29,6 @@ Bug reports and feature requests can be sent to \href{https://github.com/MarcinK
 authoriseGitHub(ClientID, ClientSecret) -> github_token
 }
 }
-\author{
-Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
-}
 \references{
 More about \pkg{archivist.github} can be found on 
 \href{http://marcinkosinski.github.io/archivist.github/}{marcinkosinski.github.io/archivist.github/} 
@@ -45,4 +42,6 @@ Other archivist.github: \code{\link{archive}},
   \code{\link{deleteGitHubRepo}},
   \code{\link{pushGitHubRepo}}
 }
-
+\author{
+Przemyslaw Biecek, \email{przemyslaw.biecek@gmail.com}
+}

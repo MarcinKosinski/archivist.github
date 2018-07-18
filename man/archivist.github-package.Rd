@@ -12,7 +12,7 @@ restoring and searching for R objects. More about \pkg{archivis.github} can be f
 \details{
 More about \pkg{archivis.github} can be found on 
 \href{http://marcinkosinski.github.io/archivist.github/}{marcinkosinski.github.io/archivist.github/} 
-and about \pkg{archivist} in posts' history on \href{http://pbiecek.github.io/archivist/Posts.html}{http://pbiecek.github.io/archivist/Posts.html}#'
+and about \pkg{archivist} in posts' history on \href{https://pbiecek.github.io/archivist/articles/posts.html}{https://pbiecek.github.io/archivist/articles/posts.html}#'
 }
 \note{
 Bug reports and feature requests can be sent to \href{https://github.com/MarcinKosinski/archivist.github/issues}{https://github.com/MarcinKosinski/archivist.github/issues}
@@ -22,14 +22,11 @@ Bug reports and feature requests can be sent to \href{https://github.com/MarcinK
 
 This package is well explained on this \href{http://r-bloggers.com/r-hero-saves-backup-city-with-archivist-and-github}{http://r-bloggers.com/r-hero-saves-backup-city-with-archivist-and-github} blog post.
 }
-\author{
-Marcin Kosinski [aut, cre] \email{m.p.kosinski@gmail.com} \cr
-Przemyslaw Biecek [aut] \email{przemyslaw.biecek@gmail.com}
-}
+
 \references{
 More about \pkg{archivist.github} can be found on 
 \href{http://marcinkosinski.github.io/archivist.github/}{marcinkosinski.github.io/archivist.github/} 
-and about \pkg{archivist} in posts' history on \href{http://pbiecek.github.io/archivist/Posts.html}{http://pbiecek.github.io/archivist/Posts.html}
+and about \pkg{archivist} in posts' history on \href{https://pbiecek.github.io/archivist/articles/posts.html}{https://pbiecek.github.io/archivist/articles/posts.html}
 }
 \seealso{
 Other archivist.github: \code{\link{archive}},
@@ -39,4 +36,7 @@ Other archivist.github: \code{\link{archive}},
   \code{\link{deleteGitHubRepo}},
   \code{\link{pushGitHubRepo}}
 }
-
+\author{
+Marcin Kosinski [aut, cre] \email{m.p.kosinski@gmail.com} \cr
+Przemyslaw Biecek [aut] \email{przemyslaw.biecek@gmail.com}
+}

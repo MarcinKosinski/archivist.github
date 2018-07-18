@@ -1,5 +1,5 @@
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/archivist.github)](http://cran.r-project.org/package=archivist.github/)
-[![Downloads](http://cranlogs.r-pkg.org/badges/archivist.github)](http://cran.r-project.org/package=archivist.github/)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/archivist.github)](https://CRAN.R-project.org/package=archivist.github)
+[![Downloads](http://cranlogs.r-pkg.org/badges/archivist.github)](https://CRAN.R-project.org/package=archivist.github)
 [![Total Downloads](http://cranlogs.r-pkg.org/badges/grand-total/archivist.github?color=orange)](http://cranlogs.r-pkg.org/badges/grand-total/archivist.github)
 [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 [![Linux Build Status](https://api.travis-ci.org/pbiecek/archivist.png)](https://travis-ci.org/MarcinKosinski/archivist.github)[![Build status](https://ci.appveyor.com/api/projects/status/4tt8hc840c149tdo?svg=true)](https://ci.appveyor.com/project/MarcinKosinski/archivist-github)[![codecov](https://codecov.io/gh/MarcinKosinski/archivist.github/branch/master/graph/badge.svg)](https://codecov.io/gh/MarcinKosinski/archivist.github)[![Pending Pull-Requests](http://githubbadges.herokuapp.com/MarcinKosinski/archivist.github/pulls.svg?style=flat)](https://github.com/MarcinKosinski/archivist.github/pulls)

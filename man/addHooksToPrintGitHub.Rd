@@ -51,10 +51,6 @@ summaryRemoteRepo()
 showRemoteRepo()
 }
 }
-\author{
-Przemyslaw Biecek (\link{addHooksToPrint}), \email{przemyslaw.biecek@gmail.com} \cr
-Marcin Kosinski (\link{addHooksToPrintGitHub}), \email{m.p.kosinski@gmail.com}
-}
 \references{
 More about \pkg{archivist.github} can be found on 
 \href{http://marcinkosinski.github.io/archivist.github/}{marcinkosinski.github.io/archivist.github/} 
@@ -63,4 +59,7 @@ and about \pkg{archivist} in posts' history on \href{http://pbiecek.github.io/ar
 \seealso{
 Other archivist: \code{\link{archivist-github-integration}}
 }
-
+\author{
+Przemyslaw Biecek (\link{addHooksToPrint}), \email{przemyslaw.biecek@gmail.com} \cr
+Marcin Kosinski (\link{addHooksToPrintGitHub}), \email{m.p.kosinski@gmail.com}
+}

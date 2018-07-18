@@ -2,8 +2,8 @@
 % Please edit documentation in R/agithub.R
 \docType{class}
 \name{archivist-github-integration}
-\alias{agithub}
 \alias{archivist-github-integration}
+\alias{agithub}
 \title{Archivist Integration With GitHub}
 \description{
 Set of functions to integrate \link[archivist]{archivist-package} with
@@ -72,9 +72,6 @@ repoDescription = "My models and stuff")
 
 }
 }
-\author{
-Marcin Kosinski, \email{m.p.kosinski@gmail.com}
-}
 \references{
 More about \pkg{archivist.github} can be found on 
 \href{http://marcinkosinski.github.io/archivist.github/}{marcinkosinski.github.io/archivist.github/} 
@@ -83,4 +80,6 @@ and about \pkg{archivist} in posts' history on \href{http://pbiecek.github.io/ar
 \seealso{
 Other archivist: \code{\link{addHooksToPrintGitHub}}
 }
-
+\author{
+Marcin Kosinski, \email{m.p.kosinski@gmail.com}
+}
